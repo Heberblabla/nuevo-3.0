@@ -12,9 +12,14 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import Modo_de_juego.Vs_Rey_Mago;
+import java.awt.Color;
+import javax.swing.*;
+import java.awt.*;
 
 public class Soticklord {
 
+    private static JFrame frame; // referencia de la ventana
     static List<jugador1> ejercitojugador1 = new ArrayList<>();
     static List<jugador2> ejercitojugador2 = new ArrayList<>();
 
@@ -28,46 +33,88 @@ public class Soticklord {
     //  Guardar la selección de cada jugador
     static Seleccion seleccion1;
     static Seleccion seleccion2;
+    static Modo_de_juego.Seleccion seleccion3;
+    static Modo_de_juego.Seleccion seleccion4;
 
     //  Base de datos de personajes cargada desde CSV
     static Map<String, String[]> stats = new HashMap<>();
 
     public static void main(String[] args) {
-        //  Cargar datos del CSV
-        cargarCSV("recursos/Datos.csv");
+        cargarCSV("recursos/Datos.csv");//  Cargar datos del CSV
 
-        //  Selección del jugador 1
+        menu();
+
+    }
+
+    public static void pvp() {
+        frame.dispose(); // 🔹 cierra
         seleccion1 = new Seleccion(null, "Jugador 1");
-        System.out.println("Jugador 1 eligió: " + seleccion1.nombre);
+        System.out.println("Jugador 2 eligió: " + seleccion1.nombre);
 
-        // 🔹 Selección del jugador 2
         seleccion2 = new Seleccion(null, "Jugador 2");
         System.out.println("Jugador 2 eligió: " + seleccion2.nombre);
 
-        // 🔹 Asignar los objetos reales de cada selección
         asignar();
 
-        // ✅ Mostrar los ejércitos
-        System.out.println("\n--- EJÉRCITOS ---");
-
-        System.out.println("👑 Jugador 1 -> Rey: " + rey1.getNombre() + " | Vida: " + rey1.getVida());
-        jugador1[] tropas1 = {tropaA1, tropaA2, tropaA3, tropaA4, tropaA5};
-        for (int i = 0; i < tropas1.length; i++) {
-            if (tropas1[i] != null) {
-                System.out.println("  Tropa A" + (i + 1) + " -> " + tropas1[i].getNombre() + " | Vida: " + tropas1[i].getVida());
-            }
-        }
-
-        System.out.println("\n👑 Jugador 2 -> Rey: " + rey2.getNombre() + " | Vida: " + rey2.getVida());
-        jugador2[] tropas2 = {tropaB1, tropaB2, tropaB3, tropaB4, tropaB5};
-        for (int i = 0; i < tropas2.length; i++) {
-            if (tropas2[i] != null) {
-                System.out.println("  Tropa B" + (i + 1) + " -> " + tropas2[i].getNombre() + " | Vida: " + tropas2[i].getVida());
-            }
-        }
-
-        // 🔹 Inicia batalla
         Batalla xd = new Batalla(ejercitojugador1, ejercitojugador2, null, "waza");
+
+    }
+
+    public static void evento() {
+        frame.dispose(); // 🔹 cierra
+        seleccion3 = new Modo_de_juego.Seleccion(null, "Jugador 1");
+        System.out.println("Jugador 1 eligió: " + seleccion3.nombre);
+
+        seleccion4 = new Modo_de_juego.Seleccion(null, "Jugador 2");
+        System.out.println("Jugador 2 eligió: " + seleccion4.nombre);
+
+        asignar1();
+        
+        System.out.println("creadni jueh");
+        Vs_Rey_Mago waza = new Vs_Rey_Mago(ejercitojugador1, ejercitojugador2, null, "waza");
+        System.out.println("creadni jueh");
+    }
+
+    public static void menu() {
+        frame = new JFrame("Mini Menú");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(300, 200);
+        frame.setLocationRelativeTo(null); // Centrar en pantalla
+
+        // Crear panel con layout vertical
+        JPanel panel = new JPanel();
+        panel.setLayout(new GridLayout(3, 1, 10, 10)); // 3 filas, 1 columna, espacio entre botones
+
+        // Crear botones
+        JButton pvpButton = new JButton("PvP Local");
+        JButton eventoButton = new JButton("Evento");
+        JButton catalogoButton = new JButton("Catálogo");
+
+        // Agregar botones al panel
+        panel.add(pvpButton);
+        panel.add(eventoButton);
+        panel.add(catalogoButton);
+
+        // Agregar panel a la ventana
+        frame.add(panel, BorderLayout.CENTER);
+
+        // Mostrar ventana
+        frame.setVisible(true);
+
+        // Acciones de los botones (ejemplo con mensaje)
+        pvpButton.addActionListener(e -> {
+            pvp();
+            
+        });
+        eventoButton.addActionListener(e -> {
+            evento();
+            
+        });
+        catalogoButton.addActionListener(e -> {
+            System.out.println("hola waza");
+            
+        });
+
     }
 
     // 📌 Método para cargar el CSV a memoria
@@ -124,7 +171,7 @@ public class Soticklord {
         );
     }
 
-    // 📌 Asignación automática de tropas y reyes
+    // Asignación automática de tropas y reyes . pvp
     public static void asignar() {
         // Jugador 1
         rey1 = crearJugador1(seleccion1.nombre);
@@ -146,4 +193,23 @@ public class Soticklord {
 
         ejercitojugador2.addAll(Arrays.asList(rey2, tropaB1, tropaB2, tropaB3, tropaB4, tropaB5));
     }
+
+    // Asignación automática de tropas y reyes . evento
+    public static void asignar1() {
+        // Jugador 1
+        rey1 = crearJugador1(seleccion3.nombre);
+        tropaA1 = crearJugador1(seleccion3.nombre1);
+        tropaA2 = crearJugador1(seleccion3.nombre2);
+
+        ejercitojugador1.addAll(Arrays.asList(rey1, tropaA1, tropaA2));
+
+        // Jugador 2
+        rey2 = crearJugador2(seleccion4.nombre);
+        tropaB1 = crearJugador2(seleccion4.nombre1);
+        tropaB2 = crearJugador2(seleccion4.nombre2);
+
+        ejercitojugador2.addAll(Arrays.asList(rey2, tropaB1, tropaB2));
+        System.out.println("asigando");
+    }
+
 }
