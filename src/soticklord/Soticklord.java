@@ -13,9 +13,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import Modo_de_juego.Vs_Rey_Mago;
-import java.awt.Color;
 import javax.swing.*;
 import java.awt.*;
+import Modo_de_juego.*;
 
 public class Soticklord {
 
@@ -23,12 +23,18 @@ public class Soticklord {
     static List<jugador1> ejercitojugador1 = new ArrayList<>();
     static List<jugador2> ejercitojugador2 = new ArrayList<>();
 
+    static List<Jugador> ejercitojugadores = new ArrayList<>();
+
+    static Mago magitoa = new Mago("Rey Mago", 5000, 50, 2, 0.5, true, "recursos/Rey_Mago.png", "recursos/tropa_muerta.png");
+
     // Objetos de cada jugador
     static jugador1 rey1;
     static jugador1 tropaA1, tropaA2, tropaA3, tropaA4, tropaA5;
 
     static jugador2 rey2;
     static jugador2 tropaB1, tropaB2, tropaB3, tropaB4, tropaB5;
+
+    static Jugador rey10, Tropa11, Tropa12, rey20, Tropa21, Tropa22;
 
     //  Guardar la selección de cada jugador
     static Seleccion seleccion1;
@@ -38,13 +44,6 @@ public class Soticklord {
 
     //  Base de datos de personajes cargada desde CSV
     static Map<String, String[]> stats = new HashMap<>();
-
-    public static void main(String[] args) {
-        cargarCSV("recursos/Datos.csv");//  Cargar datos del CSV
-
-        menu();
-
-    }
 
     public static void pvp() {
         frame.dispose(); // 🔹 cierra
@@ -69,9 +68,9 @@ public class Soticklord {
         System.out.println("Jugador 2 eligió: " + seleccion4.nombre);
 
         asignar1();
-        
+
         System.out.println("creadni jueh");
-        Vs_Rey_Mago waza = new Vs_Rey_Mago(ejercitojugador1, ejercitojugador2, null, "waza");
+        Vs_Rey_Mago waza = new Vs_Rey_Mago(ejercitojugadores, null, "waza", magitoa);
         System.out.println("creadni jueh");
     }
 
@@ -104,15 +103,15 @@ public class Soticklord {
         // Acciones de los botones (ejemplo con mensaje)
         pvpButton.addActionListener(e -> {
             pvp();
-            
+
         });
         eventoButton.addActionListener(e -> {
             evento();
-            
+
         });
         catalogoButton.addActionListener(e -> {
             System.out.println("hola waza");
-            
+
         });
 
     }
@@ -171,6 +170,24 @@ public class Soticklord {
         );
     }
 
+    public static Jugador crearJugador(String nombre) {
+        String[] s = stats.get(nombre);
+        if (s == null) {
+            return null;
+        }
+        return new Jugador(
+                s[0], // Nombre
+                Integer.parseInt(s[1]), // Vida
+                Integer.parseInt(s[2]), // Ataque
+                Double.parseDouble(s[3]), // Multiplicador
+                Double.parseDouble(s[4]), // Probabilidad
+                Boolean.parseBoolean(s[5]), // Aereo
+                true, // siempre inicia vivo
+                s[6], // RutaViva
+                s[7] // RutaMuerta
+        );
+    }
+
     // Asignación automática de tropas y reyes . pvp
     public static void asignar() {
         // Jugador 1
@@ -196,20 +213,21 @@ public class Soticklord {
 
     // Asignación automática de tropas y reyes . evento
     public static void asignar1() {
-        // Jugador 1
-        rey1 = crearJugador1(seleccion3.nombre);
-        tropaA1 = crearJugador1(seleccion3.nombre1);
-        tropaA2 = crearJugador1(seleccion3.nombre2);
+        // Jugadores
+        rey10 = crearJugador(seleccion3.nombre);
+        Tropa11 = crearJugador(seleccion3.nombre1);
+        Tropa12 = crearJugador(seleccion3.nombre2);
+        rey20 = crearJugador(seleccion4.nombre);
+        Tropa21 = crearJugador(seleccion4.nombre1);
+        Tropa22 = crearJugador(seleccion4.nombre2);
 
-        ejercitojugador1.addAll(Arrays.asList(rey1, tropaA1, tropaA2));
-
-        // Jugador 2
-        rey2 = crearJugador2(seleccion4.nombre);
-        tropaB1 = crearJugador2(seleccion4.nombre1);
-        tropaB2 = crearJugador2(seleccion4.nombre2);
-
-        ejercitojugador2.addAll(Arrays.asList(rey2, tropaB1, tropaB2));
+        ejercitojugadores.addAll(Arrays.asList(rey10, Tropa11, Tropa12, rey20, Tropa21, Tropa22));
         System.out.println("asigando");
+    }
+
+    public static void main(String[] args) {
+        cargarCSV("recursos/Datos.csv");//  Cargar datos del CSV
+        menu();
     }
 
 }
