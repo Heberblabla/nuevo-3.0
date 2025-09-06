@@ -1,0 +1,9 @@
+;;;;
+Ataque del Mago;Inspiración (Algoritmo);Semana;Complejidad Big O;Significado en palabras simples
+ataqueNormal;Recorrido secuencial;Semana 1;O(n);El tiempo crece linealmente según la cantidad de enemigos. Si hay 10 enemigos ? 10 golpes.
+ataqueSelectivo;Selección (buscar máximo);Semana 2;O(n);Busca al más fuerte. Revisa a todos una vez.
+golpeBurbujeante;Burbuja (intercambio);Semana 2;O(n²);Compara enemigos de dos en dos muchas veces. Muy lento si hay muchos enemigos.
+insercionFantasma;Inserción;Semana 2;O(n²);Ordena uno por uno, insertando en su lugar. Igual lento con muchos enemigos.
+fusionDeDaños;Merge sort (fusión directa);Semana 3;O(n log n);Divide y conquista. Mucho más rápido que burbuja o inserción.
+tormentaEquilibrada;Mezcla equilibrada múltiple;Semana 4;O(n log n);Ataca en varios grupos al mismo tiempo, balanceado.
+ritualPolifasico;Método polifásico;Semana 4;O(n log n);Ataca en fases, cada fase más selectiva. Muy eficiente.
