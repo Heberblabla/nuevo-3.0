@@ -43,6 +43,9 @@ public class Vs_Rey_Mago extends JDialog {
     private static JLabel magito; //imagen del mago
     private static JLabel magitovida;  //vida del magito
 
+    public static JButton Mago = new JButton("🔥☠️Continuar☠️🔥");
+    public static JButton botonAtacar = new JButton("Atacar");
+
     private static JLabel vidaRey1, vidaT1A, vidaT2A;//texto
     private static JLabel vidaRey2, vidaT1B, vidaT2B;//textos
     private static JComboBox<String> combo1, combo2, combo3, combo4, combo5, combo6; //desplegable
@@ -55,8 +58,7 @@ public class Vs_Rey_Mago extends JDialog {
         setLayout(null);
 
         // ------------ BOTÓN atacar ----------------
-        JButton botonAtacar = new JButton("Atacar");
-        botonAtacar.setBounds(500, 350, 150, 40);
+        botonAtacar.setBounds(400, 600, 150, 40);
         add(botonAtacar);
         botonAtacar.setVisible(false);
 
@@ -69,71 +71,80 @@ public class Vs_Rey_Mago extends JDialog {
         empezar.addActionListener(e -> {
             InicializarImagenes(ejercitos, magito);
             crearcombos(ejercitos);
-            combo1.setVisible(false);
-            //se crea para la primera tropa para atacar
-
+            combo1.setVisible(true);
             empezar.setVisible(false); //boton de empezar se oculta
             botonAtacar.setVisible(true); //boton de atacr se hace visible
 
         });
 
-        JButton waos = new JButton("Empezar");
-        waos.setBounds(400, 250, 150, 40);
-        add(waos);
+        Mago.setBounds(500, 350, 150, 50);
+        add(Mago);
+        Mago.setVisible(false);
 
-        botonAtacar.addActionListener(e -> {
-            waos(ejercitos, magito);
-            waos.setVisible(true);
+        Mago.addActionListener(e -> {
+            waos(ejercitos, magito);//el mago ataca
+            Mago.setVisible(false);//boton del mago se oculta
+            turno_de_la_tropa_correspondiente =7;
+            mostrarSiguiente(ejercitos);//mostrara el sigueinte despliego de la tropa viva
+            botonAtacar.setVisible(true);//aparece boton atacar
+
         });
 
-        waos.addActionListener(e -> {
-            int Seleccion_posicion_del_turno_tropa;
+        botonAtacar.addActionListener(e -> {
+
+            if ((turno_de_la_tropa_correspondiente + 1) == 7) {
+                botonAtacar.setVisible(false);
+                Mago.setVisible(true);
+            }
+
             String seleccion_de_ataque;
             int posicionn;
 
             switch (turno_de_la_tropa_correspondiente) {
                 case 1:
-                    posicionn = 2;
+                    posicionn = 2;//o = rey
                     seleccion_de_ataque = (String) combo1.getSelectedItem();
-                    //int Seleccion_posicion_del_turno_tropa = Character.getNumericValue(((String) tropas_del_enemigo2_para_seleccionar.getSelectedItem()).charAt(0)); //:vvvvvvvv
+
                     waos1(seleccion_de_ataque, ejercitos, magito, posicionn);
-                    mostrarSiguiente(ejercitos, posicionn);
+                    mostrarSiguiente(ejercitos);
                     break;
                 case 2:
                     posicionn = 1;
                     seleccion_de_ataque = (String) combo2.getSelectedItem();
-                    //int Seleccion_posicion_del_turno_tropa = Character.getNumericValue(((String) tropas_del_enemigo2_para_seleccionar.getSelectedItem()).charAt(0)); //:vvvvvvvv
+
                     waos1(seleccion_de_ataque, ejercitos, magito, posicionn);
-                    mostrarSiguiente(ejercitos, posicionn);
+                    mostrarSiguiente(ejercitos);
                     break;
                 case 3:
                     posicionn = 0;
                     seleccion_de_ataque = (String) combo3.getSelectedItem();
-                    //int Seleccion_posicion_del_turno_tropa = Character.getNumericValue(((String) tropas_del_enemigo2_para_seleccionar.getSelectedItem()).charAt(0)); //:vvvvvvvv
+
                     waos1(seleccion_de_ataque, ejercitos, magito, posicionn);
-                    mostrarSiguiente(ejercitos, posicionn);
+                    mostrarSiguiente(ejercitos);
                     break;
                 case 4:
                     posicionn = 5;
                     seleccion_de_ataque = (String) combo4.getSelectedItem();
-                    //int Seleccion_posicion_del_turno_tropa = Character.getNumericValue(((String) tropas_del_enemigo2_para_seleccionar.getSelectedItem()).charAt(0)); //:vvvvvvvv
+
                     waos1(seleccion_de_ataque, ejercitos, magito, posicionn);
-                    mostrarSiguiente(ejercitos, posicionn);
+                    mostrarSiguiente(ejercitos);
                     break;
                 case 5:
                     posicionn = 4;
                     seleccion_de_ataque = (String) combo5.getSelectedItem();
-                    //int Seleccion_posicion_del_turno_tropa = Character.getNumericValue(((String) tropas_del_enemigo2_para_seleccionar.getSelectedItem()).charAt(0)); //:vvvvvvvv
+
                     waos1(seleccion_de_ataque, ejercitos, magito, posicionn);
-                    mostrarSiguiente(ejercitos, posicionn);
+                    mostrarSiguiente(ejercitos);
                     break;
                 case 6:
                     posicionn = 3;
                     seleccion_de_ataque = (String) combo6.getSelectedItem();
-                    //int Seleccion_posicion_del_turno_tropa = Character.getNumericValue(((String) tropas_del_enemigo2_para_seleccionar.getSelectedItem()).charAt(0)); //:vvvvvvvv
                     waos1(seleccion_de_ataque, ejercitos, magito, posicionn);
-                    mostrarSiguiente(ejercitos, posicionn);
+                    mostrarSiguiente(ejercitos);
                     break;
+                case 0:
+                    break;
+
             }
 
         });
@@ -143,137 +154,107 @@ public class Vs_Rey_Mago extends JDialog {
 
     }
 
-    private void mostrarSiguiente(List<Jugador> ejercito11, int posicion_del_turno_actual) {
-        //si estoy en pocicion 5 , debo ver si la siguiente tropa en el arrasylist (posicon4) esta viva :v
-        //si estoy en turno 1 , debo ver si la siguiente tropa en el arrasylist (poscion2)  esta viva :v
+    private void mostrarSiguiente(List<Jugador> ejercito11) {
         int waaa = 0;
-        //tropas_del_enemigo2_para_seleccionar.setVisible(false);
-        //tropas_del_enemigo1_para_seleccionar.setVisible(false);
 
         while (true) {
-
+            System.out.println("se esta ejecutando el turno : " + turno_de_la_tropa_correspondiente);
             if (turno_de_la_tropa_correspondiente == 1) {
+                System.out.println("se entro al if del turno " + turno_de_la_tropa_correspondiente);
                 //el desplegable de la tripa 1 desaparece
                 combo1.setVisible(false);
-                //vamos a ver si la tropa q sigue ,esta viva
-                posicion_del_turno_actual = posicion_del_turno_actual - 1;
-                //verficamos 
-                if (ejercito11.get(posicion_del_turno_actual).estado_de_vida) {
-                    //si esta viva ,entonces se activa su deslegable de ataques
+                System.out.println(ejercito11.get(1).nombre);
+                if (ejercito11.get(1).vida > 0) {
                     combo2.setVisible(true);
-                    //desplegable(ejercito11, ejercito22, posicion_del_turno_actual, true, false);
-                    //y se avanza a l siguiente turno
                     turno_de_la_tropa_correspondiente++;
-                    //y se acaba el metood
                     return;
                 } else {
                     turno_de_la_tropa_correspondiente++;
                 }
 
             }
+
             if (turno_de_la_tropa_correspondiente == 2) {
+                System.out.println("se entro al if del turno " + turno_de_la_tropa_correspondiente);
                 //el desplegable de la tripa 1 desaparece
                 combo2.setVisible(false);
-                //vamos a ver si la tropa q sigue ,esta viva
-                posicion_del_turno_actual = posicion_del_turno_actual - 1;
-                //verficamos 
-                if (ejercito11.get(posicion_del_turno_actual).estado_de_vida) {
-                    //si esta viva ,entonces se activa su deslegable de ataques
+                System.out.println(ejercito11.get(0).nombre);
+                if (ejercito11.get(0).vida > 0) {
                     combo3.setVisible(true);
-                    //desplegable(ejercito11, ejercito22, posicion_del_turno_actual, true, false);
-                    //y se avanza a l siguiente turno
                     turno_de_la_tropa_correspondiente++;
-                    //y se acaba el metood
                     return;
                 } else {
                     turno_de_la_tropa_correspondiente++;
                 }
 
             }
+
             if (turno_de_la_tropa_correspondiente == 3) {
+                System.out.println("se entro al if del turno " + turno_de_la_tropa_correspondiente);
                 //el desplegable de la tripa 1 desaparece
                 combo3.setVisible(false);
-                //vamos a ver si la tropa q sigue ,esta viva
-                posicion_del_turno_actual = posicion_del_turno_actual - 1;
-                //verficamos 
-                if (ejercito11.get(posicion_del_turno_actual).estado_de_vida) {
-                    //si esta viva ,entonces se activa su deslegable de ataques
-                    //combo4.setVisible(true);
-                    //desplegable(ejercito11, ejercito22, posicion_del_turno_actual, true, false);
-                    //y se avanza a l siguiente turno
+                if (ejercito11.get(5).vida > 0) {
+                    combo4.setVisible(true);
                     turno_de_la_tropa_correspondiente++;
-                    //y se acaba el metood
                     return;
                 } else {
-                    posicion_del_turno_actual = 6;
                     turno_de_la_tropa_correspondiente++;
                 }
 
             }
+
             if (turno_de_la_tropa_correspondiente == 4) {
+                System.out.println("se entro al if del turno " + turno_de_la_tropa_correspondiente);
                 //el desplegable de la tripa 1 desaparece
                 combo4.setVisible(false);
-                //vamos a ver si la tropa q sigue ,esta viva
-                posicion_del_turno_actual = posicion_del_turno_actual - 1;
-                //verficamos 
-                if (ejercito11.get(posicion_del_turno_actual).estado_de_vida) {
-                    //si esta viva ,entonces se activa su deslegable de ataques
-                    //desplegable(ejercito11, ejercito22, posicion_del_turno_actual, true, false);
+                if (ejercito11.get(4).vida > 0) {
                     combo5.setVisible(true);
-                    //y se avanza a l siguiente turno
                     turno_de_la_tropa_correspondiente++;
-                    //y se acaba el metood
                     return;
                 } else {
                     turno_de_la_tropa_correspondiente++;
                 }
 
             }
+
             if (turno_de_la_tropa_correspondiente == 5) {
+                System.out.println("se entro al if del turno " + turno_de_la_tropa_correspondiente);
                 //el desplegable de la tripa 1 desaparece
                 combo5.setVisible(false);
-                //vamos a ver si la tropa q sigue ,esta viva
-
-                posicion_del_turno_actual = posicion_del_turno_actual - 1;
-                //verficamos      
-                if (ejercito11.get(posicion_del_turno_actual).estado_de_vida) {
-                    //si esta viva ,entonces se activa su deslegable de ataques
-
+                if (ejercito11.get(3).vida > 0) {
                     combo6.setVisible(true);
-                    //desplegable(ejercito11, ejercito22, posicion_del_turno_actual, true, false);
-                    //y se avanza a l siguiente turno
                     turno_de_la_tropa_correspondiente++;
                     return;
                 } else {
-
                     turno_de_la_tropa_correspondiente++;
                 }
 
             }
 
-            //nos pasamos pala siguietne tropa
             if (turno_de_la_tropa_correspondiente == 6) {
-                //el desplegable de la tripa 1 desaparece
+                System.out.println("se entro al if del turno " + turno_de_la_tropa_correspondiente);
+                //eldesplegable se oculta
                 combo6.setVisible(false);
-                //vamos a ver si la tropa q sigue ,esta viva ,actualizamos el contenedor
-                posicion_del_turno_actual = 5;
-                //verficamos 
-                if (ejercito11.get(posicion_del_turno_actual).estado_de_vida) {
-                    //si esta viva ,entonces se activa su deslegable de ataques
-                    //desplegable(ejercito11, ejercito22, posicion_del_turno_actual, false, true);
+                Mago.setVisible(true);
+                botonAtacar.setVisible(false);
+                return;
+            }
+
+            if (turno_de_la_tropa_correspondiente == 7) {
+                System.out.println("se entro al if del turno " + turno_de_la_tropa_correspondiente);
+                turno_de_la_tropa_correspondiente = 1;
+                if (ejercito11.get(2).vida > 0) {
                     combo1.setVisible(true);
-                    //y se avanza a l siguiente turno
-                    turno_de_la_tropa_correspondiente++;
-                    //y se acaba el metood
                     return;
                 } else {
-                    turno_de_la_tropa_correspondiente = 1;
+
                     waaa = waaa + 1;
                 }
 
             }
 
-            if (waaa > 100) {
+            if (waaa > 2) {
+                System.out.println("recorrido 100 veces ebuscando vidas");
                 break;
             }
 
@@ -287,32 +268,32 @@ public class Vs_Rey_Mago extends JDialog {
             ejercito1.get(posicion).vida += 50;
         }
         if (Ataque_selecionado.equalsIgnoreCase("Contraataque")) {
-            magitoo.vida -= (ejercito1.get(posicion).ataque_base * 2);
+            magitoo.vida = magitoo.vida - (ejercito1.get(posicion).ataque_base * 2);
         }
         if (Ataque_selecionado.equalsIgnoreCase("Estocada veloz")) {
             ejercito1.get(posicion).vida -= 150; // pierde vida por arriesgarse
-            magitoo.vida -= (ejercito1.get(posicion).ataque_base * 2);
+            magitoo.vida = magitoo.vida - (ejercito1.get(posicion).ataque_base * 2);
         }
 
         // 🔹 ARQUERO
         if (Ataque_selecionado.equalsIgnoreCase("Disparo rápido")) {
-            magitoo.vida -= (ejercito1.get(posicion).ataque_base * 2);
+            magitoo.vida = magitoo.vida - (ejercito1.get(posicion).ataque_base * 2);
         }
         if (Ataque_selecionado.equalsIgnoreCase("Flecha penetrante")) {
-            magitoo.vida -= (ejercito1.get(posicion).ataque_base * 3);
+            magitoo.vida = magitoo.vida - (ejercito1.get(posicion).ataque_base * 3);
         }
         if (Ataque_selecionado.equalsIgnoreCase("Lluvia de flechas")) {
             ejercito1.get(posicion).vida -= 100; // desgaste físico
-            magitoo.vida -= (ejercito1.get(posicion).ataque_base * 2);
+            magitoo.vida = magitoo.vida - (ejercito1.get(posicion).ataque_base * 2);
         }
 
         // 🔹 LANZATONIO
         if (Ataque_selecionado.equalsIgnoreCase("Lanzamiento poderoso")) {
             ejercito1.get(posicion).vida -= 100;
-            magitoo.vida -= (ejercito1.get(posicion).ataque_base * 2);
+            magitoo.vida = magitoo.vida - (ejercito1.get(posicion).ataque_base * 2);
         }
         if (Ataque_selecionado.equalsIgnoreCase("Estocada")) {
-            magitoo.vida -= (ejercito1.get(posicion).ataque_base * 3);
+            magitoo.vida = magitoo.vida - (ejercito1.get(posicion).ataque_base * 3);
         }
         if (Ataque_selecionado.equalsIgnoreCase("Bloqueo")) {
             ejercito1.get(posicion).vida += 150;
@@ -321,43 +302,48 @@ public class Vs_Rey_Mago extends JDialog {
         // 🔹 REY ESPADACHÍN
         if (Ataque_selecionado.equalsIgnoreCase("Espadazo real")) {
             ejercito1.get(posicion).vida -= 50;
-            magitoo.vida -= (ejercito1.get(posicion).ataque_base * 2);
+            magitoo.vida = magitoo.vida - (ejercito1.get(posicion).ataque_base * 2);
         }
         if (Ataque_selecionado.equalsIgnoreCase("Guardia de hierro")) {
             ejercito1.get(posicion).vida += 50;
         }
         if (Ataque_selecionado.equalsIgnoreCase("Golpe final")) {
-            magitoo.vida -= (ejercito1.get(posicion).ataque_base * 3);
+            magitoo.vida = magitoo.vida - (ejercito1.get(posicion).ataque_base * 3);
         }
 
         // 🔹 REY LANZATONIO
         if (Ataque_selecionado.equalsIgnoreCase("Lanza imperial")) {
-            magitoo.vida -= (ejercito1.get(posicion).ataque_base * 3);
+            magitoo.vida = magitoo.vida - (ejercito1.get(posicion).ataque_base * 3);
         }
         if (Ataque_selecionado.equalsIgnoreCase("Bloqueo real")) {
             ejercito1.get(posicion).vida += 50;
         }
         if (Ataque_selecionado.equalsIgnoreCase("Tormenta de lanzas")) {
-            magitoo.vida -= (ejercito1.get(posicion).ataque_base * 3);
+            magitoo.vida = magitoo.vida - (ejercito1.get(posicion).ataque_base * 3);
         }
 
         // 🔹 REY ARQUERO
         if (Ataque_selecionado.equalsIgnoreCase("Disparo real")) {
-            magitoo.vida -= (ejercito1.get(posicion).ataque_base * 3);
+            magitoo.vida = magitoo.vida - (ejercito1.get(posicion).ataque_base * 3);
         }
         if (Ataque_selecionado.equalsIgnoreCase("Flecha explosiva")) {
-            magitoo.vida -= (ejercito1.get(posicion).ataque_base * 4);
+            magitoo.vida = magitoo.vida - (ejercito1.get(posicion).ataque_base * 4);
         }
         if (Ataque_selecionado.equalsIgnoreCase("Furia del rey")) {
-            magitoo.vida -= (ejercito1.get(posicion).ataque_base * 5);
+            magitoo.vida = magitoo.vida - (ejercito1.get(posicion).ataque_base * 5);
         }
+
+        actualizarImagenes(ejercito1, magitoo);
     }
 
     public void waos(List<Jugador> jugador, Mago magitoo) {
-        System.out.println("waza");
+
         magitoo.realizarTurno(jugador);
         actualizarImagenes(jugador, magitoo);
-        System.out.println("wazaaaa");
+
+        for (int i = 0; i < 6; i++) {
+            System.out.println(jugador.get(i).estado_de_vida);
+        }
 
     }
 
@@ -466,19 +452,37 @@ public class Vs_Rey_Mago extends JDialog {
                 120, 120, 1));
         magitovida.setText((magitoo.getVida() > 0) ? "vida: " + magitoo.getVida() : " X ");
 
+        if (magitoo.vida <= 0) {
+            JOptionPane.showMessageDialog(null, "¡¡Ganaste!!");
+            System.exit(0); // cierra toda la aplicación
+        }
+
+        boolean todasMuertas = true;
+        for (Jugador tropa : ejercito1) {
+            if (tropa.vida > 0) { // queda alguien con vida
+                todasMuertas = false;
+                break;
+            }
+        }
+
+        if (todasMuertas) {
+            JOptionPane.showMessageDialog(null, "Perdiste...");
+            System.exit(0); // cierra el juego
+        }
+
     }
 
     //crea los combsos en general
     private void crearcombos(List<Jugador> ejercito1) {
         // Crear desplegables manualmente
 
-        combo1 = crearCombo(ejercito1.get(2).nombre, 230, 520);
-        combo2 = crearCombo(ejercito1.get(1).nombre, 230, 170);
-        combo3 = crearCombo(ejercito1.get(0).nombre, 50, 250);
+        combo1 = crearCombo(ejercito1.get(2).nombre, 230, 300);//tropa1
+        combo2 = crearCombo(ejercito1.get(1).nombre, 230, 150);//tropa2
+        combo3 = crearCombo(ejercito1.get(0).nombre, 50, 225);//rey1
 
-        combo4 = crearCombo(ejercito1.get(3).nombre, 230, 620);
-        combo5 = crearCombo(ejercito1.get(4).nombre, 230, 470);
-        combo6 = crearCombo(ejercito1.get(5).nombre, 50,550);
+        combo4 = crearCombo(ejercito1.get(5).nombre, 230, 450);//1
+        combo5 = crearCombo(ejercito1.get(4).nombre, 230, 600);//2
+        combo6 = crearCombo(ejercito1.get(3).nombre, 50, 525);//rey
 
         // Al inicio todos invisibles
         combo1.setVisible(false);

@@ -25,7 +25,7 @@ public class Soticklord {
 
     static List<Jugador> ejercitojugadores = new ArrayList<>();
 
-    static Mago magitoa = new Mago("Rey Mago", 5000, 50, 2, 0.5, true, "recursos/Rey_Mago.png", "recursos/tropa_muerta.png");
+    static Mago magitoa = new Mago("Rey Mago", 8500, 80, 3, 0.75, true, "recursos/Rey_Mago.png", "recursos/tropa_muerta.png");
 
     // Objetos de cada jugador
     static jugador1 rey1;
