@@ -20,12 +20,13 @@ import Modo_de_juego.*;
 public class Soticklord {
 
     private static JFrame frame; // referencia de la ventana
+    private static JFrame Dificultad;
     static List<jugador1> ejercitojugador1 = new ArrayList<>();
     static List<jugador2> ejercitojugador2 = new ArrayList<>();
 
     static List<Jugador> ejercitojugadores = new ArrayList<>();
 
-    static Mago magitoa = new Mago("Rey Mago", 8500, 80, 3, 0.75, true, "recursos/Rey_Mago.png", "recursos/tropa_muerta.png");
+    static Mago magito;
 
     // Objetos de cada jugador
     static jugador1 rey1;
@@ -60,7 +61,7 @@ public class Soticklord {
     }
 
     public static void evento() {
-        frame.dispose(); // 🔹 cierra
+        Dificultad.dispose(); // 🔹 cierra
         seleccion3 = new Modo_de_juego.Seleccion(null, "Jugador 1");
         System.out.println("Jugador 1 eligió: " + seleccion3.nombre);
 
@@ -70,7 +71,7 @@ public class Soticklord {
         asignar1();
 
         System.out.println("creadni jueh");
-        Vs_Rey_Mago waza = new Vs_Rey_Mago(ejercitojugadores, null, "waza", magitoa);
+        Vs_Rey_Mago waza = new Vs_Rey_Mago(ejercitojugadores, null, "waza", magito);
         System.out.println("creadni jueh");
     }
 
@@ -106,7 +107,7 @@ public class Soticklord {
 
         });
         eventoButton.addActionListener(e -> {
-            evento();
+            dificultad();
 
         });
         catalogoButton.addActionListener(e -> {
@@ -114,6 +115,54 @@ public class Soticklord {
 
         });
 
+    }
+
+    public static void dificultad() {
+        frame.dispose();
+        Dificultad = new JFrame("Elije la dificultadd");
+        Dificultad.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        Dificultad.setSize(300, 200);
+        Dificultad.setLocationRelativeTo(null); // Centrar en pantalla
+
+        // Crear panel con layout vertical
+        JPanel panel = new JPanel();
+        panel.setLayout(new GridLayout(3, 1, 10, 10)); // 3 filas, 1 columna, espacio entre botones
+
+        // Crear botones
+        JButton facil = new JButton("Fcil");
+        JButton medio = new JButton("Medio");
+        JButton Dificil = new JButton("Dificil");
+        JButton Locura = new JButton("Locura");
+
+        // Agregar botones al panel
+        panel.add(facil);
+        panel.add(medio);
+        panel.add(Dificil);
+        panel.add(Locura);
+        // Agregar panel a la ventana
+        Dificultad.add(panel, BorderLayout.CENTER);
+
+        // Mostrar ventana
+        Dificultad.setVisible(true);
+
+        // Acciones de los botones (ejemplo con mensaje)
+        facil.addActionListener(e -> {
+            magito = new Mago("Rey Mago", 5000, 45, 2, 0.30, true, "recursos/Rey_Mago.png", "recursos/tropa_muerta.png");
+            evento();
+        });
+        medio.addActionListener(e -> {
+            magito = new Mago("Rey Mago", 9000, 60, 4, 0.40, true, "recursos/Rey_Mago.png", "recursos/tropa_muerta.png");
+            evento();
+        });
+        Dificil.addActionListener(e -> {
+            magito = new Mago("Rey Mago", 15000, 70, 5, 0.50, true, "recursos/Rey_Mago.png", "recursos/tropa_muerta.png");
+            evento();
+        });
+
+        Locura.addActionListener(e -> {
+            magito = new Mago("Rey Mago", 20000, 100, 10, 0.80, true, "recursos/Rey_Mago.png", "recursos/tropa_muerta.png");
+            evento();
+        });
     }
 
     // 📌 Método para cargar el CSV a memoria
@@ -221,7 +270,7 @@ public class Soticklord {
         Tropa21 = crearJugador(seleccion4.nombre1);
         Tropa22 = crearJugador(seleccion4.nombre2);
 
-        ejercitojugadores.addAll(Arrays.asList(rey10, Tropa11, Tropa12, rey20, Tropa21, Tropa22));
+        ejercitojugadores.addAll(Arrays.asList(rey10, Tropa11, Tropa12, rey20, Tropa21,Tropa22 ));
         System.out.println("asigando");
     }
 

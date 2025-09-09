@@ -1,0 +1,96 @@
+package Data;
+
+import java.util.ArrayList;
+
+public abstract class Tropa {
+
+    private String nombre;
+    private int vida;
+    public int ataque_base;
+    private double daño_critico;
+    private double probabilidad_de_critico;
+    private boolean aereo;
+    private boolean estado_de_vida;
+    private String rutaviva;
+    private String rutamuerta;
+
+    public int getVida() {
+        return vida;
+    }
+
+    public void setVida(int vida) {
+        this.vida = vida;
+    }
+
+    public int getAtaque_base() {
+        return ataque_base;
+    }
+
+    public void setAtaque_base(int ataque_base) {
+        this.ataque_base = ataque_base;
+    }
+
+    public double getDaño_critico() {
+        return daño_critico;
+    }
+
+    public void setDaño_critico(double daño_critico) {
+        this.daño_critico = daño_critico;
+    }
+
+    public double getProbabilidad_de_critico() {
+        return probabilidad_de_critico;
+    }
+
+    public void setProbabilidad_de_critico(double probabilidad_de_critico) {
+        this.probabilidad_de_critico = probabilidad_de_critico;
+    }
+
+    public boolean isAereo() {
+        return aereo;
+    }
+
+    public void setAereo(boolean aereo) {
+        this.aereo = aereo;
+    }
+
+    public boolean isEstado_de_vida() {
+        return estado_de_vida;
+    }
+
+    public void setEstado_de_vida(boolean estado_de_vida) {
+        this.estado_de_vida = estado_de_vida;
+    }
+
+    public String getRutaviva() {
+        return rutaviva;
+    }
+
+    public void setRutaviva(String rutaviva) {
+        this.rutaviva = rutaviva;
+    }
+
+    public String getRutamuerta() {
+        return rutamuerta;
+    }
+
+    public void setRutamuerta(String rutamuerta) {
+        this.rutamuerta = rutamuerta;
+    }
+    
+    //metodo principal para atcar
+    abstract void Ataque_normal(ArrayList<Tropa> enemigos, int posicion);
+    
+    
+    private void imprimir() {
+        System.out.println("vida: " + this.vida);
+        System.out.println(" ataque base: " + this.ataque_base);
+        System.out.println("daño critico: " + this.daño_critico);
+        System.out.println("probabilidad de critico: " + this.probabilidad_de_critico);
+        System.out.println("es aereo?: " + this.aereo);
+        System.out.println(" su estado de vida es: " + this.estado_de_vida);
+        System.out.println(" ruta de imagen viva: " + this.rutaviva);
+        System.out.println("ruta de imagen muerta: " + this.rutamuerta);
+    }
+
+}

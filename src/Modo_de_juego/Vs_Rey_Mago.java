@@ -123,14 +123,14 @@ public class Vs_Rey_Mago extends JDialog {
                     mostrarSiguiente(ejercitos);
                     break;
                 case 4:
-                    posicionn = 5;
+                    posicionn = 4;
                     seleccion_de_ataque = (String) combo4.getSelectedItem();
 
                     waos1(seleccion_de_ataque, ejercitos, magito, posicionn);
                     mostrarSiguiente(ejercitos);
                     break;
                 case 5:
-                    posicionn = 4;
+                    posicionn = 5;
                     seleccion_de_ataque = (String) combo5.getSelectedItem();
 
                     waos1(seleccion_de_ataque, ejercitos, magito, posicionn);
