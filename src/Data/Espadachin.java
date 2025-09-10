@@ -3,14 +3,11 @@ package Data;
 import java.util.ArrayList;
 import java.util.Random;
 
-/**
- *
- * @author heber
- */
 public class Espadachin extends Tropa {
 
     private String nombre = "Espadachin";
     private int vida = 420;
+    private int vidavida = 420;
     private int ataque_base = 50;
     private double daño_critico = 1.8;
     private double probabilidad_de_critico = 0.45;
@@ -37,7 +34,7 @@ public class Espadachin extends Tropa {
     }
 
     @Override //metodo principal para atcar
-    void Ataque_normal(ArrayList<Tropa> enemigos, int posicion) {
+    public void Ataque_normal(ArrayList<Tropa> enemigos, int posicion) {
         int daño = Daño();
         int nuevavida;
         nuevavida = enemigos.get(posicion).getVida() - daño;
@@ -45,21 +42,23 @@ public class Espadachin extends Tropa {
     }
 
     //// 🔹 ESPADACHÍN
-    
-    // if (Ataque_selecionado.equalsIgnoreCase("Contraataque")) {
-    //     magitoo.vida = magitoo.vida - (ejercito1.get(posicion).ataque_base * 2);
-    // }
     // if (Ataque_selecionado.equalsIgnoreCase("Estocada veloz")) {
     //    ejercito1.get(posicion).vida -= 150; // pierde vida por arriesgarse
     //     magitoo.vida = magitoo.vida - (ejercito1.get(posicion).ataque_base * 2);
     // }
-    
-    public void Contraataque(ArrayList<Tropa> enemigos, int posicion){//solo sirve si te bajaron vida
+    public void Contraataque(ArrayList<Tropa> enemigos, int posicion) {//solo sirve si te bajaron vida
         int daño = Daño();
-        int contraatque;
-        
-        int nuevavida = enemigos.get(posicion).getVida() - daño;
-        enemigos.get(posicion).setVida(nuevavida); 
+        int contraatque = ((vidavida - this.vida) / 2) + daño;
+
+        int nuevavida = enemigos.get(posicion).getVida() - contraatque;
+        enemigos.get(posicion).setVida(nuevavida);
     }
-    
+
+    public void Estocada_Veloz(ArrayList<Tropa> enemigos, int posicion) {
+        this.vida = this.vida - 60;
+        int daño = Daño();
+        daño = daño * 2;
+        int nuevavida = enemigos.get(posicion).getVida() - daño;
+        enemigos.get(posicion).setVida(nuevavida);
+    }
 }

@@ -1,27 +1,6 @@
 package Modo_de_juego;
 
-//se creara los atques del mago
-//Ataque Normal ⚔️
-//Estrategia: Recorrido secuencial (O(n)).
-//Recorre todos los datos de un archivo y te golpea uno por uno.
-//Ataque Selectivo 
-//estrategia: Selección (Selection Sort).
-//Busca el número más fuerte y lo lanza contra ti.
-//Golpe Burbujeante 💥
-//Estrategia: Burbuja (Bubble Sort).
-//Compara golpes en pares y deja que los más fuertes “suban” para atacarte.
-//Inserción Fantasma 👻
-//Estrategia: Inserción (Insertion Sort).
-//Inserta ataques adicionales entre los existentes, confundiendo al enemigo.
-//Fusión de Daños 🔗
-//Estrategia: Fusión natural (Merge Sort).
-//Divide ataques en dos mitades, los ordena y los lanza como combo.
-//Tormenta Equilibrada ⚡
-//Estrategia: Mezcla equilibrada múltiple.
-//Divide los ataques en varios rayos mágicos y los reparte de forma balanceada.
-//Ritual Polifásico ⏳
-//Estrategia: Polifásico (ordenación externa).
-//Lanza ráfagas en fases: primero largas, luego cortas y más fuertes.
+
 import javax.swing.*;
 import java.awt.*;
 import java.util.List;
@@ -84,7 +63,7 @@ public class Vs_Rey_Mago extends JDialog {
         Mago.addActionListener(e -> {
             waos(ejercitos, magito);//el mago ataca
             Mago.setVisible(false);//boton del mago se oculta
-            turno_de_la_tropa_correspondiente =7;
+            turno_de_la_tropa_correspondiente = 7;
             mostrarSiguiente(ejercitos);//mostrara el sigueinte despliego de la tropa viva
             botonAtacar.setVisible(true);//aparece boton atacar
 

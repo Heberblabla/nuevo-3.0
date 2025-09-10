@@ -3,7 +3,7 @@ package Data;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class Lanzatonio extends Tropa {
+public class Rey_Arquero extends Tropa {
 
     private String nombre = "Lanzatonio";
     private int vida = 550;
@@ -32,21 +32,21 @@ public class Lanzatonio extends Tropa {
         return daño;
     }
 
-    @Override //metodo principal para atcar
-    public void Ataque_normal(ArrayList<Tropa> enemigos, int posicion) { // ataque normal on la probabilidad de lanzatonio
+    @Override
+    public void Ataque_normal(ArrayList<Tropa> enemigos, int posicion) {
         int daño = Daño();
         int nuevavida = enemigos.get(posicion).getVida() - daño;
         enemigos.get(posicion).setVida(nuevavida);
-
     }
 
-    public void Estocada(ArrayList<Tropa> enemigos, int posicion) { //30%de probabilida de multiplicar tu daño x 4
+    public void Disparo_Real(ArrayList<Tropa> enemigos, int posicion) {
         int daño;
         Random random = new Random();
         double suerte = random.nextDouble();
+        double probabilidad = this.probabilidad_de_critico / 2;
 
-        if (suerte < 0.3) {
-            double x = this.ataque_base * 4;
+        if (suerte < probabilidad) {
+            double x = this.ataque_base * 5;
             daño = (int) Math.ceil(x); // convertir a int redondeando hacia arriba
         } else {
             daño = this.ataque_base; // golpe normal
@@ -54,11 +54,31 @@ public class Lanzatonio extends Tropa {
 
         int nuevavida = enemigos.get(posicion).getVida() - daño;
         enemigos.get(posicion).setVida(nuevavida);
+    }
+
+    public void Flecha_Explosiva(ArrayList<Tropa> enemigos, int posicion) {
+        Random rand = new Random();
+
+        // genera un número entre 0 y 99
+        int num = rand.nextInt(100);
+
+        if (num < 15) { // 0–9 → 10% de probabilidad        
+            this.vida = this.vida - 200;
+        } else {
+            int daño = Daño();
+            daño = daño * 4;
+            int nuevavida = enemigos.get(posicion).getVida() - daño;
+            enemigos.get(posicion).setVida(nuevavida);
+        }
 
     }
 
-    public void Bloqueo() { //aumenta + 100 puntos de vida
-        this.vida = this.vida + 100;
-
+    public void Furia_Del_Rey(ArrayList<Tropa> enemigos, int posicion) {
+        this.vida = this.vida + 50;
+        this.ataque_base = this.ataque_base + 50;
+        this.probabilidad_de_critico = this.probabilidad_de_critico + 0.1;
+        this.daño_critico = this.daño_critico + 0.1;
     }
+
+    
 }

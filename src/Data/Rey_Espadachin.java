@@ -3,27 +3,25 @@ package Data;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class Arquero extends Tropa {
+public class Rey_Espadachin extends Tropa {
 
-    private String nombre = "Arquero";
-    private int vida = 300;
-    private int ataque_base = 40;
-    private double daño_critico = 2.0;
+    private String nombre = "Rey_Espadachin";
+    private int vida = 850;
+    private int ataque_base = 110;
+    private double daño_critico = 1.8;
     private double probabilidad_de_critico = 0.30;
-    private boolean aereo = true;
+    private boolean aereo = false;
     private boolean estado_de_vida = true;
-    private String rutaviva = "recursos/Tropas/arquero_tropa.png";
+    private String rutaviva = "recursos/rey/rey_espadachin.png";
     private String rutamuerta = "recursos/tropa_muerta.png";
+    private boolean turnoActivo = true; //verficar si puede atacar este turno
+    private boolean turnoDoble = false; //verficar si tiene doble turno
 
-    // 🔹 ARQUERO
-    // if (Ataque_selecionado.equalsIgnoreCase("Flecha penetrante")) {
-    //      magitoo.vida = magitoo.vida - (ejercito1.get(posicion).ataque_base * 3);
-    //}
     private int Daño() {
         int daño;
         Random random = new Random();
         double suerte = random.nextDouble();
-   
+
         if (suerte < this.probabilidad_de_critico) {
             double x = this.ataque_base * this.daño_critico;
             daño = (int) Math.ceil(x); // convertir a int redondeando hacia arriba
@@ -33,39 +31,33 @@ public class Arquero extends Tropa {
 
         return daño;
     }
-    
-    @Override //metodo principal para atcar
+
+    @Override
     public void Ataque_normal(ArrayList<Tropa> enemigos, int posicion) {
         int daño = Daño();
         int nuevavida = enemigos.get(posicion).getVida() - daño;
         enemigos.get(posicion).setVida(nuevavida);
-
     }
 
-    public void Flecha_de_Sangre(ArrayList<Tropa> enemigos, int posicion) {
+    public void Espadazo_Real(ArrayList<Tropa> enemigos, int posicion) {
         this.vida = this.vida - 50;
         int daño = Daño();
-        daño = daño * 3;
+        daño = daño * 2;
         int nuevavida = enemigos.get(posicion).getVida() - daño;
         enemigos.get(posicion).setVida(nuevavida);
 
     }
 
-    public void Flecha_penetrante(ArrayList<Tropa> enemigos, int posicion) { //20%de probabilida de multiplicar tu daño x 5
-        int daño;
-        Random random = new Random();
-        double suerte = random.nextDouble();
+    public void En_Guardia(ArrayList<Tropa> enemigos, int posicion) {
+        this.vida = this.vida + 120;
+    }
 
-        if (suerte < 0.2) {
-            double x = this.ataque_base * 5;
-            daño = (int) Math.ceil(x); // convertir a int redondeando hacia arriba
-        } else {
-            daño = this.ataque_base; // golpe normal
-        }
-
+    public void Ataque_Final(ArrayList<Tropa> enemigos, int posicion) {
+        this.vida = this.vida - 150;
+        int daño = Daño();
+        daño = daño * 4;
         int nuevavida = enemigos.get(posicion).getVida() - daño;
         enemigos.get(posicion).setVida(nuevavida);
-
     }
 
 }
