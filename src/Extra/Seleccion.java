@@ -13,10 +13,8 @@ public class Seleccion extends JDialog {
     private JComboBox<String> cbRey, cbTropa1, cbTropa2, cbTropa3, cbTropa4, cbTropa5;//desplegables 
     private JLabel lblRey, lblTropa1, lblTropa2, lblTropa3, lblTropa4, lblTropa5;//imagenes 
     private JLabel vidaRey, vidaT1, vidaT2, vidaT3, vidaT4, vidaT5;//textos
-
-    public String nombre;
     public int vida;
-
+    public String nombre;
     public String nombre1;
     public String nombre2;
     public String nombre3;

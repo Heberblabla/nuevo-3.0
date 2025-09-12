@@ -15,10 +15,7 @@ public class Arquero extends Tropa {
     private String rutaviva = "recursos/Tropas/arquero_tropa.png";
     private String rutamuerta = "recursos/tropa_muerta.png";
 
-    // 🔹 ARQUERO
-    // if (Ataque_selecionado.equalsIgnoreCase("Flecha penetrante")) {
-    //      magitoo.vida = magitoo.vida - (ejercito1.get(posicion).ataque_base * 3);
-    //}
+    
     private int Daño() {
         int daño;
         Random random = new Random();

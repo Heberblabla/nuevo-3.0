@@ -41,6 +41,33 @@ public class Seleccion extends JDialog {
         Rey_Lanzatonio.class,
         Rey_Espadachin.class,};
 
+    public String getNombre_Rey() {
+        return nombre_Rey;
+    }
+
+    public String getNombre_tropa_1() {
+        return nombre_tropa_1;
+    }
+
+    public String getNombre_tropa_2() {
+        return nombre_tropa_2;
+    }
+
+    public String getNombre_tropa_3() {
+        return nombre_tropa_3;
+    }
+
+    public String getNombre_tropa_4() {
+        return nombre_tropa_4;
+    }
+
+    public String getNombre_tropa_5() {
+        return nombre_tropa_5;
+    }
+    
+    
+    
+
     public Seleccion(Frame parent, String titulo) {
         super(parent, titulo, true); // true = modal
         setSize(1000, 600);
@@ -64,7 +91,6 @@ public class Seleccion extends JDialog {
         });
 
         Guardar.addActionListener(e -> {
-            System.out.println("wazaa");
             dispose(); // 🔹 cie
         });
 

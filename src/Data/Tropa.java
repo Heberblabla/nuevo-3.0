@@ -6,7 +6,7 @@ public abstract class Tropa {
 
     private String nombre;
     private int vida;
-    public int ataque_base;
+    public int ataque_base = 100;
     private double daño_critico;
     private double probabilidad_de_critico;
     private boolean aereo;
@@ -79,7 +79,7 @@ public abstract class Tropa {
     }
     
     //metodo principal para atcar
-    abstract void Ataque_normal(ArrayList<Tropa> enemigos, int posicion);
+   abstract void Ataque_normal(ArrayList<Tropa> enemigos, int posicion);
     
     
     private void imprimir() {
