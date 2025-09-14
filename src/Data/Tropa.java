@@ -6,13 +6,28 @@ public abstract class Tropa {
 
     private String nombre;
     private int vida;
-    public int ataque_base = 100;
+    private int vidavida;
+    private int ataque_base;
     private double daño_critico;
     private double probabilidad_de_critico;
     private boolean aereo;
     private boolean estado_de_vida;
     private String rutaviva;
     private String rutamuerta;
+    private boolean turnoActivo;
+    private boolean turnoDoble;
+
+    public int getVidavida() {
+        return vidavida;
+    }
+
+    public boolean isTurnoActivo() {
+        return turnoActivo;
+    }
+
+    public boolean isTurnoDoble() {
+        return turnoDoble;
+    }
 
     public int getVida() {
         return vida;
@@ -24,6 +39,22 @@ public abstract class Tropa {
 
     public int getAtaque_base() {
         return ataque_base;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public void setVidavida(int vidavida) {
+        this.vidavida = vidavida;
+    }
+
+    public void setTurnoActivo(boolean turnoActivo) {
+        this.turnoActivo = turnoActivo;
+    }
+
+    public void setTurnoDoble(boolean turnoDoble) {
+        this.turnoDoble = turnoDoble;
     }
 
     public void setAtaque_base(int ataque_base) {
@@ -77,12 +108,13 @@ public abstract class Tropa {
     public void setRutamuerta(String rutamuerta) {
         this.rutamuerta = rutamuerta;
     }
-    
-    //metodo principal para atcar
-   abstract void Ataque_normal(ArrayList<Tropa> enemigos, int posicion);
-    
-    
-    private void imprimir() {
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void imprimir() {
+        System.out.println("nombre :" + this.nombre);
         System.out.println("vida: " + this.vida);
         System.out.println(" ataque base: " + this.ataque_base);
         System.out.println("daño critico: " + this.daño_critico);

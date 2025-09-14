@@ -3,22 +3,28 @@ package Herramientas;
 import java.util.ArrayList;
 import java.util.List;
 import Data.*;
+import java.util.*;
 
 public class Buscador {
 
-    private final Class<?>[] clases = {
-        Arquero.class,
-        Lanzatonio.class,
-        Espadachin.class,
-        Rey_Arquero.class,
-        Rey_Lanzatonio.class,
-        Rey_Espadachin.class
-    };
+    private final Map<String, Class<? extends Tropa>> mapa = new HashMap<>();
+
+    public Buscador() {
+        // Registrar clases
+        registrar(Arquero.class);
+        registrar(Lanzatonio.class);
+        registrar(Espadachin.class);
+        registrar(Rey_Arquero.class);
+        registrar(Rey_Lanzatonio.class);
+        registrar(Rey_Espadachin.class);
+    }
+
+    private void registrar(Class<? extends Tropa> c) {
+        mapa.put(c.getSimpleName(), c);
+    }
 
     public List<Tropa> obtenerTropas(Seleccion seleccion) {
         List<Tropa> tropas = new ArrayList<>();
-
-        // Meter el rey + 5 tropas en una lista de strings
         String[] nombres = {
             seleccion.getNombre_Rey(),
             seleccion.getNombre_tropa_1(),
@@ -28,22 +34,16 @@ public class Buscador {
             seleccion.getNombre_tropa_5()
         };
 
-        // Buscar en las clases e instanciar
         for (String nombre : nombres) {
-            for (Class<?> c : clases) {
-                if (c.getSimpleName().equals(nombre)) {
-                    try {
-                        Object obj = c.getDeclaredConstructor().newInstance();
-                        if (obj instanceof Tropa) {
-                            tropas.add((Tropa) obj);
-                        }
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
+            Class<? extends Tropa> c = mapa.get(nombre);
+            if (c != null) {
+                try {
+                    tropas.add(c.getDeclaredConstructor().newInstance());
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
             }
         }
-
         return tropas;
     }
 }
