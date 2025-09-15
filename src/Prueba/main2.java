@@ -44,6 +44,9 @@ public class main2 {
         Lanzatonio waos2 = new Lanzatonio();
         System.out.println(waos2.getNombre());
 
+        
+        
+        
         System.out.println("vida del arquero: " + waos1.getVida());
         System.out.println("el lanzantoinio baja :" + waos2.getAtaque_base());
         

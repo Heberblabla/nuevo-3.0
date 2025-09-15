@@ -19,13 +19,13 @@ public class Rey_Arquero extends Tropa {
 
     public Rey_Arquero() {
         this.nombre = "Lanzatonio";
-        this.vida = 550;
-        this.ataque_base = 100;
-        this.daño_critico = 1.5;
+        this.vida = 700;
+        this.ataque_base = 90;
+        this.daño_critico = 1.9;
         this.probabilidad_de_critico = 0.40;
-        this.aereo = false;
+        this.aereo = true;
         this.estado_de_vida = true;
-        this.rutaviva = "recursos/Tropas/lanzatonio_tropa.png";
+        this.rutaviva = "recursos/rey/rey_arquero.png";
         this.rutamuerta = "recursos/tropa_muerta.png";
         this.turnoActivo = true; //verficar si puede atacar este turno
         this.turnoDoble = false; //verficar si tiene doble turno  

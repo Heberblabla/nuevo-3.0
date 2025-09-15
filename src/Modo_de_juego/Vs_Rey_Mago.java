@@ -1,6 +1,5 @@
 package Modo_de_juego;
 
-
 import javax.swing.*;
 import java.awt.*;
 import java.util.List;

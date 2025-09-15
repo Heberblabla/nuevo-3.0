@@ -105,8 +105,6 @@ public class Lanzatonio extends Tropa {
         this.turnoDoble = turnoDoble;
     }
 
-    
-    
     public Lanzatonio() {
         this.nombre = "Lanzatonio";
         this.vida = 550;
@@ -161,7 +159,7 @@ public class Lanzatonio extends Tropa {
 
     }
 
-    public void Bloqueo() { //aumenta + 100 puntos de vida
+    public void Bloqueo(ArrayList<Enemigo> enemigos, int posicion) { //aumenta + 100 puntos de vida
         this.vida = this.vida + 100;
 
     }
