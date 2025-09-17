@@ -1,7 +1,0 @@
-Nombre,Vida,Ataque,Multiplicador,Probabilidad,Aereo,RutaViva,RutaMuerta
-Rey Arquero,700,90,1.9,0.2,true,recursos/rey/rey_arquero.png,recursos/tropa_muerta.png
-Rey Lanzatonio,950,110,1.6,0.14,false,recursos/rey/rey_lanzatonio.png,recursos/tropa_muerta.png
-Rey Espadachin,850,105,1.7,0.12,false,recursos/rey/rey_espadachin.png,recursos/tropa_muerta.png
-Arquero,300,40,2.0,0.18,true,recursos/Tropas/arquero_tropa.png,recursos/tropa_muerta.png
-Lanzatonio,450,55,1.5,0.12,false,recursos/Tropas/lanzatonio_tropa.png,recursos/tropa_muerta.png
-Espadachin,420,50,1.6,0.10,false,recursos/Tropas/espadachin_tropa.png,recursos/tropa_muerta.png

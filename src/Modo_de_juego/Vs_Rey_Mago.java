@@ -10,7 +10,7 @@ import javax.imageio.ImageIO;
 import java.lang.reflect.Method;
 
 import Extra.*;
-import Tropas.*;
+//import Tropa.*;
 
 public class Vs_Rey_Mago extends JDialog {
 
