@@ -1,9 +1,14 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
 package Data;
 
 import java.util.ArrayList;
 import java.util.Random;
 
-public class Rey_Arquero extends Tropa {
+
+public class Gigante extends Tropa {
 
     private String nombre;
     private int vida;
@@ -17,18 +22,26 @@ public class Rey_Arquero extends Tropa {
     private boolean turnoActivo;
     private boolean turnoDoble;
 
-    public Rey_Arquero() {
-        this.nombre = "Lanzatonio";
-        this.vida = 700;
-        this.ataque_base = 90;
-        this.daño_critico = 1.9;
-        this.probabilidad_de_critico = 0.40;
-        this.aereo = true;
+    public Gigante() {
+        this.nombre = "Gigante";
+        this.vida = 800;
+        this.ataque_base = 100;
+        this.daño_critico = 5.0;
+        this.probabilidad_de_critico = 0.10;
+        this.aereo = false;
         this.estado_de_vida = true;
-        this.rutaviva = "recursos/rey/rey_arquero.png";
+        this.rutaviva = "recursos/Tropas/Gigante_tropa.png";
         this.rutamuerta = "recursos/tropa_muerta.png";
         this.turnoActivo = true; //verficar si puede atacar este turno
-        this.turnoDoble = false; //verficar si tiene doble turno  
+        this.turnoDoble = false; //verficar si tiene doble turno
+    }
+
+    public boolean isTurnoActivo() {
+        return turnoActivo;
+    }
+
+    public boolean isTurnoDoble() {
+        return turnoDoble;
     }
 
     public String getNombre() {
@@ -65,14 +78,6 @@ public class Rey_Arquero extends Tropa {
 
     public String getRutamuerta() {
         return rutamuerta;
-    }
-
-    public boolean isTurnoActivo() {
-        return turnoActivo;
-    }
-
-    public boolean isTurnoDoble() {
-        return turnoDoble;
     }
 
     public void setNombre(String nombre) {
@@ -119,10 +124,6 @@ public class Rey_Arquero extends Tropa {
         this.turnoDoble = turnoDoble;
     }
 
-    
-    
-    
-    
     private int Daño() {
         int daño;
         Random random = new Random();
@@ -138,52 +139,11 @@ public class Rey_Arquero extends Tropa {
         return daño;
     }
 
-    
+    //metodo principal para atcar
     public void Ataque_normal(ArrayList<Tropa> enemigos, int posicion) {
         int daño = Daño();
         int nuevavida = enemigos.get(posicion).getVida() - daño;
         enemigos.get(posicion).setVida(nuevavida);
-    }
-
-    public void Disparo_Real(ArrayList<Tropa> enemigos, int posicion) {
-        int daño;
-        Random random = new Random();
-        double suerte = random.nextDouble();
-        double probabilidad = this.probabilidad_de_critico / 2;
-
-        if (suerte < probabilidad) {
-            double x = this.ataque_base * 5;
-            daño = (int) Math.ceil(x); // convertir a int redondeando hacia arriba
-        } else {
-            daño = this.ataque_base; // golpe normal
-        }
-
-        int nuevavida = enemigos.get(posicion).getVida() - daño;
-        enemigos.get(posicion).setVida(nuevavida);
-    }
-
-    public void Flecha_Explosiva(ArrayList<Tropa> enemigos, int posicion) {
-        Random rand = new Random();
-
-        // genera un número entre 0 y 99
-        int num = rand.nextInt(100);
-
-        if (num < 15) { // 0–9 → 10% de probabilidad        
-            this.vida = this.vida - 200;
-        } else {
-            int daño = Daño();
-            daño = daño * 4;
-            int nuevavida = enemigos.get(posicion).getVida() - daño;
-            enemigos.get(posicion).setVida(nuevavida);
-        }
 
     }
-
-    public void Furia_Del_Rey(ArrayList<Tropa> enemigos, int posicion) {
-        this.vida = this.vida + 50;
-        this.ataque_base = this.ataque_base + 50;
-        this.probabilidad_de_critico = this.probabilidad_de_critico + 0.1;
-        this.daño_critico = this.daño_critico + 0.1;
-    }
-
 }

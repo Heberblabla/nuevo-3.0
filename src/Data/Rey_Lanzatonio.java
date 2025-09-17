@@ -143,7 +143,7 @@ public class Rey_Lanzatonio extends Tropa {
     }
 
     
-    public void Ataque_normal(ArrayList<Enemigo> enemigos, int posicion) {
+    public void Ataque_normal(ArrayList<Tropa> enemigos, int posicion) {
         int daño = Daño();
         int nuevavida = enemigos.get(posicion).getVida() - daño;
         enemigos.get(posicion).setVida(nuevavida);
@@ -153,18 +153,18 @@ public class Rey_Lanzatonio extends Tropa {
     //if (Ataque_selecionado.equalsIgnoreCase("Tormenta de lanzas")) {
     //   magitoo.vida = magitoo.vida - (ejercito1.get(posicion).ataque_base * 3);
     //  }
-    public void Lanza_Imperial(ArrayList<Enemigo> enemigos, int posicion) {
+    public void Lanza_Imperial(ArrayList<Tropa> enemigos, int posicion) {
         int daño = Daño();
         daño = daño * 2;
         int nuevavida = enemigos.get(posicion).getVida() - daño;
         enemigos.get(posicion).setVida(nuevavida);
     }
 
-    public void Bloqueo_real(ArrayList<Enemigo> enemigos, int posicion) {
+    public void Bloqueo_real(ArrayList<Tropa> enemigos, int posicion) {
         this.vida = this.vida + 120;
     }
 
-    public void Tormenta_de_Lanzas(ArrayList<Enemigo> enemigos, int posicion) {
+    public void Tormenta_de_Lanzas(ArrayList<Tropa> enemigos, int posicion) {
         int ataque = this.ataque_base;
         int daño_total = 0;
         for (int i = 0; i < 25; i++) {

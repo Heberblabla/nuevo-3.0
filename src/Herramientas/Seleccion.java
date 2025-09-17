@@ -37,6 +37,7 @@ public class Seleccion extends JDialog {
         Arquero.class,
         Lanzatonio.class,
         Espadachin.class,
+        Gigante.class,
         Rey_Arquero.class,
         Rey_Lanzatonio.class,
         Rey_Espadachin.class,};

@@ -141,14 +141,14 @@ public class Arquero extends Tropa {
     }
 
      //metodo principal para atcar
-    public void Ataque_normal(ArrayList<Enemigo> enemigos, int posicion) {
+    public void Ataque_normal(ArrayList<Tropa> enemigos, int posicion) {
         int daño = Daño();
         int nuevavida = enemigos.get(posicion).getVida() - daño;
         enemigos.get(posicion).setVida(nuevavida);
 
     }
 
-    public void Flecha_de_Sangre(ArrayList<Enemigo> enemigos, int posicion) {
+    public void Flecha_de_Sangre(ArrayList<Tropa> enemigos, int posicion) {
         this.vida = this.vida - 50;
         int daño = Daño();
         daño = daño * 3;
@@ -157,7 +157,7 @@ public class Arquero extends Tropa {
 
     }
 
-    public void Flecha_penetrante(ArrayList<Enemigo> enemigos, int posicion) { //20%de probabilida de multiplicar tu daño x 5
+    public void Flecha_penetrante(ArrayList<Tropa> enemigos, int posicion) { //20%de probabilida de multiplicar tu daño x 5
         int daño;
         Random random = new Random();
         double suerte = random.nextDouble();

@@ -14,6 +14,7 @@ public class Buscador {
         registrar(Arquero.class);
         registrar(Lanzatonio.class);
         registrar(Espadachin.class);
+        registrar(Gigante.class);
         registrar(Rey_Arquero.class);
         registrar(Rey_Lanzatonio.class);
         registrar(Rey_Espadachin.class);

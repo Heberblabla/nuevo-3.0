@@ -623,6 +623,7 @@ public class Batalla_1 extends JDialog {
             Arquero.class,
             Lanzatonio.class,
             Espadachin.class,
+            Gigante.class,
             Rey_Arquero.class,
             Rey_Lanzatonio.class,
             Rey_Espadachin.class
@@ -651,7 +652,7 @@ public class Batalla_1 extends JDialog {
                             }
 
                             if (metodo.equals(Ataque_selecionado)) { // 👈 aquí pones el método que quieras ejecutar
-                                // Si el método NO tiene parámetros:
+                                
                                 m.invoke(instancia, ejercito2, posicion_del_enemigo);
 
                                 // Si el método SÍ tiene parámetros, por ejemplo recibe un int:
@@ -752,9 +753,11 @@ public class Batalla_1 extends JDialog {
             Arquero.class,
             Lanzatonio.class,
             Espadachin.class,
+            Gigante.class,
             Rey_Arquero.class,
             Rey_Lanzatonio.class,
             Rey_Espadachin.class
+           
         };
 
         for (Class<?> c : clases) {

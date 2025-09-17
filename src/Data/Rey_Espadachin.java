@@ -140,7 +140,7 @@ public class Rey_Espadachin extends Tropa {
     }
 
     
-    public void Ataque_normal(ArrayList<Enemigo> enemigos, int posicion) {
+    public void Ataque_normal(ArrayList<Tropa> enemigos, int posicion) {
         int daño = Daño();
         int nuevavida = enemigos.get(posicion).getVida() - daño;
         enemigos.get(posicion).setVida(nuevavida);
@@ -155,11 +155,11 @@ public class Rey_Espadachin extends Tropa {
 
     }
 
-    public void En_Guardia(ArrayList<Enemigo> enemigos, int posicion) {
+    public void En_Guardia(ArrayList<Tropa> enemigos, int posicion) {
         this.vida = this.vida + 120;
     }
 
-    public void Ataque_Final(ArrayList<Enemigo> enemigos, int posicion) {
+    public void Ataque_Final(ArrayList<Tropa> enemigos, int posicion) {
         this.vida = this.vida - 150;
         int daño = Daño();
         daño = daño * 4;

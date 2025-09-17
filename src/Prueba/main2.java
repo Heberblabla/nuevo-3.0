@@ -52,11 +52,11 @@ public class main2 {
         
         Enemigo enemis = convertir(waos1);
         
-        ArrayList<Enemigo> enemigos = new ArrayList();
+        //ArrayList<tropa> enemigos = new ArrayList();
         
-        enemigos.add(enemis);
+        //enemigos.add(enemis);
         
-        waos2.Ataque_normal(enemigos, 0);
+        //waos2.Ataque_normal(enemigos, 0);
         
         Trasladar(waos1, enemis);
         

@@ -16,7 +16,7 @@ public class Lanzatonio extends Tropa {
     private String rutamuerta;
     private boolean turnoActivo;
     private boolean turnoDoble;
-
+    @Override
     public String getNombre() {
         return nombre;
     }
@@ -135,14 +135,13 @@ public class Lanzatonio extends Tropa {
     }
 
     //metodo principal para atcar
-    public void Ataque_normal(ArrayList<Enemigo> enemigos, int posicion) {
+    public void Ataque_normal(ArrayList<Tropa> enemigos, int posicion) {
         int daño = Daño();
         int nuevavida = enemigos.get(posicion).getVida() - daño;
         enemigos.get(posicion).setVida(nuevavida);
-
     }
 
-    public void Estocada(ArrayList<Enemigo> enemigos, int posicion) { //30%de probabilida de multiplicar tu daño x 4
+    public void Estocada(ArrayList<Tropa> enemigos, int posicion) { //30%de probabilida de multiplicar tu daño x 4
         int daño;
         Random random = new Random();
         double suerte = random.nextDouble();
@@ -159,7 +158,7 @@ public class Lanzatonio extends Tropa {
 
     }
 
-    public void Bloqueo(ArrayList<Enemigo> enemigos, int posicion) { //aumenta + 100 puntos de vida
+    public void Bloqueo(ArrayList<Tropa> enemigos, int posicion) { //aumenta + 100 puntos de vida
         this.vida = this.vida + 100;
 
     }
