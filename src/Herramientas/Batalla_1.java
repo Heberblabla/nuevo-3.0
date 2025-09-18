@@ -360,8 +360,6 @@ public class Batalla_1 extends JDialog {
     }
 
     private void mostrarSiguiente(List<Tropa> ejercito11, List<Tropa> ejercito22, int posicion_del_turno_actual) {
-        //si estoy en pocicion 5 , debo ver si la siguiente tropa en el arrasylist (posicon4) esta viva :v
-        //si estoy en turno 1 , debo ver si la siguiente tropa en el arrasylist (poscion2)  esta viva :v
         int waaa = 0;
         tropas_del_enemigo2_para_seleccionar.setVisible(false);
         tropas_del_enemigo1_para_seleccionar.setVisible(false);
@@ -613,12 +611,6 @@ public class Batalla_1 extends JDialog {
 
     private void waos(String Ataque_selecionado, int posicion_del_enemigo, List<Tropa> ejercito1, List<Tropa> ejercito2, int posicion) {
 
-        //arryas para actualizar vidas
-        JLabel[] labelsVida1 = {vidaRey1, vidaT1A, vidaT2A, vidaT3A, vidaT4A, vidaT5A};
-        JLabel[] labelsVida2 = {vidaRey2, vidaT1B, vidaT2B, vidaT3B, vidaT4B, vidaT5B};
-        JLabel[] labelsimagen1 = {jugador1Rey, jugador1Tropa1, jugador1Tropa2, jugador1Tropa3, jugador1Tropa4, jugador1Tropa5};
-        JLabel[] labelsimagen2 = {jugador2Rey, jugador2Tropa1, jugador2Tropa2, jugador2Tropa3, jugador2Tropa4, jugador2Tropa5};
-
         Class<?>[] clases = {
             Arquero.class,
             Lanzatonio.class,
@@ -626,20 +618,24 @@ public class Batalla_1 extends JDialog {
             Gigante.class,
             Rey_Arquero.class,
             Rey_Lanzatonio.class,
-            Rey_Espadachin.class
+            Rey_Espadachin.class,
+            Rey_Goku.class,
+            Rey_de_los_Gigantes.class
         };
         if (turno_de_la_tropa_correspondiente >= 0 && turno_de_la_tropa_correspondiente <= 6) {
-            String nombre = ejercito1.get(posicion).getNombre(); //nombre de la tropa
 
-            for (Class<?> c : clases) { //se busca esa clase
+            Tropa tropa = ejercito1.get(posicion);
+            String nombre = tropa.getNombre(); // nombre de la clase de tropa
+
+            for (Class<?> c : clases) { // se busca esa clase
                 if (c.getSimpleName().equals(nombre)) {
                     System.out.println("Clase encontrada: " + c.getName());
 
                     try {
-                        // Crear una instancia de la clase encontrada
-                        Object instancia = c.getDeclaredConstructor().newInstance();
+                        // 👉 usar la instancia real, no crear una nueva
+                        Object instancia = tropa;
 
-                        // Listar y ejecutar un método específico
+                        // Buscar solo el método deseado (no hace falta recorrer todos si ya sabes el nombre)
                         for (Method m : c.getDeclaredMethods()) {
                             String metodo = m.getName();
 
@@ -651,12 +647,9 @@ public class Batalla_1 extends JDialog {
                                 continue; // saltar
                             }
 
-                            if (metodo.equals(Ataque_selecionado)) { // 👈 aquí pones el método que quieras ejecutar
-                                
+                            if (metodo.equals(Ataque_selecionado)) {
+                                // Ejecutar el ataque en la tropa real
                                 m.invoke(instancia, ejercito2, posicion_del_enemigo);
-
-                                // Si el método SÍ tiene parámetros, por ejemplo recibe un int:
-                                // m.invoke(instancia, 10);
                             }
                         }
                     } catch (Exception e) {
@@ -667,17 +660,18 @@ public class Batalla_1 extends JDialog {
         }
 
         if (turno_de_la_tropa_correspondiente >= 7 && turno_de_la_tropa_correspondiente <= 12) {
-            String nombre = ejercito1.get(posicion).getNombre();
+            Tropa tropa = ejercito2.get(posicion);
+            String nombre = tropa.getNombre(); // nombre de la clase de tropa
 
-            for (Class<?> c : clases) { //se busca esa clase
+            for (Class<?> c : clases) { // se busca esa clase
                 if (c.getSimpleName().equals(nombre)) {
                     System.out.println("Clase encontrada: " + c.getName());
 
                     try {
-                        // Crear una instancia de la clase encontrada
-                        Object instancia = c.getDeclaredConstructor().newInstance();
+                        // 👉 usar la instancia real, no crear una nueva
+                        Object instancia = tropa;
 
-                        // Listar y ejecutar un método específico
+                        // Buscar solo el método deseado (no hace falta recorrer todos si ya sabes el nombre)
                         for (Method m : c.getDeclaredMethods()) {
                             String metodo = m.getName();
 
@@ -689,12 +683,9 @@ public class Batalla_1 extends JDialog {
                                 continue; // saltar
                             }
 
-                            if (metodo.equals(Ataque_selecionado)) { // 👈 aquí pones el método que quieras ejecutar
-                                // Si el método NO tiene parámetros:
+                            if (metodo.equals(Ataque_selecionado)) {
+                                // Ejecutar el ataque en la tropa real
                                 m.invoke(instancia, ejercito1, posicion_del_enemigo);
-
-                                // Si el método SÍ tiene parámetros, por ejemplo recibe un int:
-                                // m.invoke(instancia, 10);
                             }
                         }
                     } catch (Exception e) {
@@ -707,18 +698,11 @@ public class Batalla_1 extends JDialog {
         ///////actualizar su png si este muere :v
         if (turno_de_la_tropa_correspondiente >= 0 && turno_de_la_tropa_correspondiente <= 6) {
             if (ejercito2.get(posicion_del_enemigo).getVida() <= 0) {
-
                 ejercito2.get(posicion_del_enemigo).setEstado_de_vida(false);
-
-                labelsVida2[posicion_del_enemigo].setText(" X ");
-                labelsimagen2[posicion_del_enemigo].setIcon(escalarImagen("recursos/tropa_muerta.png", 120, 120, 0));
 
             }
             if (ejercito1.get(posicion).getVida() <= 0) {
                 ejercito1.get(posicion).setEstado_de_vida(false);
-
-                labelsVida1[posicion].setText(" X ");
-                labelsimagen1[posicion].setIcon(escalarImagen("recursos/tropa_muerta.png", 120, 120, 0));
 
             }
         }
@@ -727,15 +711,9 @@ public class Batalla_1 extends JDialog {
             if (ejercito1.get(posicion_del_enemigo).getVida() <= 0) {
                 ejercito1.get(posicion_del_enemigo).setEstado_de_vida(false);
 
-                labelsVida1[posicion_del_enemigo].setText(" X ");
-                labelsimagen1[posicion_del_enemigo].setIcon(escalarImagen("recursos/tropa_muerta.png", 120, 120, 1));
-
             }
-            if (ejercito2.get(posicion_del_enemigo).getVida() <= 0) {
-                ejercito2.get(posicion_del_enemigo).setEstado_de_vida(false);
-
-                labelsVida2[posicion_del_enemigo].setText(" X ");
-                labelsimagen2[posicion_del_enemigo].setIcon(escalarImagen("recursos/tropa_muerta.png", 120, 120, 0));
+            if (ejercito2.get(posicion).getVida() <= 0) {
+                ejercito2.get(posicion).setEstado_de_vida(false);
 
             }
 
@@ -748,7 +726,7 @@ public class Batalla_1 extends JDialog {
     private JComboBox<String> crearCombo(String j, int x, int y) {
         JComboBox<String> combo = new JComboBox<>();
         combo.setBounds(x, y, 150, 30);
-        
+
         Class<?>[] clases = {
             Arquero.class,
             Lanzatonio.class,
@@ -756,8 +734,10 @@ public class Batalla_1 extends JDialog {
             Gigante.class,
             Rey_Arquero.class,
             Rey_Lanzatonio.class,
-            Rey_Espadachin.class
-           
+            Rey_Espadachin.class,
+            Rey_Goku.class,
+            Rey_de_los_Gigantes.class
+
         };
 
         for (Class<?> c : clases) {

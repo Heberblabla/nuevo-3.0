@@ -1,9 +1,13 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
 package Data;
 
 import java.util.ArrayList;
 import java.util.Random;
 
-public class Lanzatonio extends Tropa {
+public class Rey_Goku extends Tropa {
 
     private String nombre;
     private int vida;
@@ -16,7 +20,29 @@ public class Lanzatonio extends Tropa {
     private String rutamuerta;
     private boolean turnoActivo;
     private boolean turnoDoble;
-    @Override
+
+    public Rey_Goku() {
+        this.nombre = "Rey_Goku";
+        this.vida = 500;
+        this.ataque_base = 50;
+        this.daño_critico = 1.5;
+        this.probabilidad_de_critico = 0.50;
+        this.aereo = true;
+        this.estado_de_vida = true;
+        this.rutaviva = "recursos/rey/Goku/rey_Goku.png";
+        this.rutamuerta = "recursos/tropa_muerta.png";
+        this.turnoActivo = true; //verficar si puede atacar este turno
+        this.turnoDoble = false; //verficar si tiene doble turno
+    }
+
+    public boolean isTurnoActivo() {
+        return turnoActivo;
+    }
+
+    public boolean isTurnoDoble() {
+        return turnoDoble;
+    }
+
     public String getNombre() {
         return nombre;
     }
@@ -51,14 +77,6 @@ public class Lanzatonio extends Tropa {
 
     public String getRutamuerta() {
         return rutamuerta;
-    }
-
-    public boolean isTurnoActivo() {
-        return turnoActivo;
-    }
-
-    public boolean isTurnoDoble() {
-        return turnoDoble;
     }
 
     public void setNombre(String nombre) {
@@ -105,20 +123,6 @@ public class Lanzatonio extends Tropa {
         this.turnoDoble = turnoDoble;
     }
 
-    public Lanzatonio() {
-        this.nombre = "Lanzatonio";
-        this.vida = 550;
-        this.ataque_base = 100;
-        this.daño_critico = 1.5;
-        this.probabilidad_de_critico = 0.40;
-        this.aereo = false;
-        this.estado_de_vida = true;
-        this.rutaviva = "recursos/Tropas/lanzatonio_tropa.png";
-        this.rutamuerta = "recursos/tropa_muerta.png";
-        this.turnoActivo = true; //verficar si puede atacar este turno
-        this.turnoDoble = false; //verficar si tiene doble turno
-    }
-
     private int Daño() {
         int daño;
         Random random = new Random();
@@ -139,27 +143,23 @@ public class Lanzatonio extends Tropa {
         int daño = Daño();
         int nuevavida = enemigos.get(posicion).getVida() - daño;
         enemigos.get(posicion).setVida(nuevavida);
-    }
-
-    public void Estocada(ArrayList<Tropa> enemigos, int posicion) { //30%de probabilida de multiplicar tu daño x 4
-        int daño;
-        Random random = new Random();
-        double suerte = random.nextDouble();
-
-        if (suerte < 0.3) {
-            double x = this.ataque_base * 4;
-            daño = (int) Math.ceil(x); // convertir a int redondeando hacia arriba
-        } else {
-            daño = this.ataque_base; // golpe normal
-        }
-
-        int nuevavida = enemigos.get(posicion).getVida() - daño;
-        enemigos.get(posicion).setVida(nuevavida);
 
     }
 
-    public void Bloqueo(ArrayList<Tropa> enemigos, int posicion) { //aumenta + 100 puntos de vida
-        this.vida += 100;
-
+    public void Transformarse_SS1(ArrayList<Tropa> enemigos, int posicion) {
+        this.rutaviva = "recursos/rey/Goku/rey_Goku_SS1.png";
     }
+
+    public void Transformarse_SS2(ArrayList<Tropa> enemigos, int posicion) {
+        this.rutaviva = "recursos/rey/Goku/rey_Goku_SS2.png";
+    }
+
+    public void Transformarse_SS3(ArrayList<Tropa> enemigos, int posicion) {
+        this.rutaviva = "recursos/rey/Goku/rey_Goku_SS3.png";
+    }
+
+    public void Fase_Normal(ArrayList<Tropa> enemigos, int posicion) {
+        this.rutaviva = "recursos/rey/Goku/rey_Goku.png";
+    }
+
 }

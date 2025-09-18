@@ -18,7 +18,7 @@ public class Rey_Arquero extends Tropa {
     private boolean turnoDoble;
 
     public Rey_Arquero() {
-        this.nombre = "Lanzatonio";
+        this.nombre = "Rey_Arquero";
         this.vida = 700;
         this.ataque_base = 90;
         this.daño_critico = 1.9;

@@ -15,6 +15,9 @@ public class Main {
         List<Tropa> ejercito1 = buscador.obtenerTropas(seleccion1);
         List<Tropa> ejercito2 = buscador.obtenerTropas(seleccion2);
 
+        System.out.println(ejercito1.get(0));
+        System.out.println(ejercito2.get(5));
+        
         Batalla_1 xd = new Batalla_1(ejercito1, ejercito2, null, "waza");
 
     }

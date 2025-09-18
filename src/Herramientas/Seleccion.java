@@ -40,6 +40,8 @@ public class Seleccion extends JDialog {
         Gigante.class,
         Rey_Arquero.class,
         Rey_Lanzatonio.class,
+        Rey_de_los_Gigantes.class,
+        Rey_Goku.class,
         Rey_Espadachin.class,};
 
     public String getNombre_Rey() {
@@ -65,9 +67,6 @@ public class Seleccion extends JDialog {
     public String getNombre_tropa_5() {
         return nombre_tropa_5;
     }
-    
-    
-    
 
     public Seleccion(Frame parent, String titulo) {
         super(parent, titulo, true); // true = modal

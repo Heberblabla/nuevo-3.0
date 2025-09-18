@@ -17,7 +17,10 @@ public class Buscador {
         registrar(Gigante.class);
         registrar(Rey_Arquero.class);
         registrar(Rey_Lanzatonio.class);
+        registrar(Rey_de_los_Gigantes.class);
+        registrar(Rey_Goku.class);
         registrar(Rey_Espadachin.class);
+        
     }
 
     private void registrar(Class<? extends Tropa> c) {

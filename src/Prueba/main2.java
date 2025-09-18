@@ -4,63 +4,14 @@ import Data.*;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import Herramientas.*;
+import java.util.Random;
 
 public class main2 {
 
     public static void main(String[] args) {
-        Class<?>[] clases = {
-            Arquero.class,
-            Lanzatonio.class,
-            Espadachin.class,
-            Rey_Arquero.class,
-            Rey_Lanzatonio.class,
-            Rey_Espadachin.class
-        };
-
-        for (Class<?> clase : clases) {
-            System.out.println("Clase: " + clase.getSimpleName());
-
-            Method[] metodos = clase.getDeclaredMethods();
-            for (Method m : metodos) {
-                String nombre = m.getName();
-
-                // Filtrar getters, setters y métodos de Object
-                if (nombre.startsWith("isAereo") || nombre.startsWith("get")
-                        || nombre.startsWith("set") || nombre.equals("toString")
-                        || nombre.equals("hashCode") || nombre.equals("equals")
-                        || nombre.equals("isEstado_de_vida") || nombre.equals("Daño")
-                        || nombre.equals("isTurnoActivo") || nombre.equals("isTurnoDoble")) {
-                    continue; // saltar
-                }
-
-                System.out.println("   Método: " + nombre);
-            }
-
-            System.out.println("---------------------------");
-        }
-
-        Arquero waos1 = new Arquero();
-        System.out.println(waos1.getNombre());
-        Lanzatonio waos2 = new Lanzatonio();
-        System.out.println(waos2.getNombre());
-
-        
-        
-        
-        System.out.println("vida del arquero: " + waos1.getVida());
-        System.out.println("el lanzantoinio baja :" + waos2.getAtaque_base());
-        
-        Enemigo enemis = convertir(waos1);
-        
-        //ArrayList<tropa> enemigos = new ArrayList();
-        
-        //enemigos.add(enemis);
-        
-        //waos2.Ataque_normal(enemigos, 0);
-        
-        Trasladar(waos1, enemis);
-        
-        System.out.println("vida del arquero: " + waos1.getVida());
+        Random random = new Random();
+        double suerte = random.nextDouble(0,1);
+        System.err.println(suerte);
 
     }
     
