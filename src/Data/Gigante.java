@@ -146,4 +146,16 @@ public class Gigante extends Tropa {
         enemigos.get(posicion).setVida(nuevavida);
 
     }
+    
+    public void Terremoto(ArrayList<Tropa> enemigos, int posicion){
+        int daño = 50;
+        enemigos.get(0).setVida(enemigos.get(0).getVida() - daño);
+        enemigos.get(1).setVida(enemigos.get(1).getVida() - daño);
+        enemigos.get(2).setVida(enemigos.get(2).getVida() - daño);
+        enemigos.get(3).setVida(enemigos.get(3).getVida() - daño);
+        enemigos.get(4).setVida(enemigos.get(4).getVida() - daño);
+        enemigos.get(5).setVida(enemigos.get(5).getVida() - daño);
+        
+        
+    }
 }

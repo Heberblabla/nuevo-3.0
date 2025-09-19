@@ -371,6 +371,7 @@ public class Batalla_1 extends JDialog {
                 //vamos a ver si la tropa q sigue ,esta viva
                 posicion_del_turno_actual = posicion_del_turno_actual - 1;
                 //verficamos 
+                
                 if (ejercito11.get(posicion_del_turno_actual).isEstado_de_vida()) {
                     //si esta viva ,entonces se activa su deslegable de ataques
                     combo2.setVisible(true);
@@ -632,7 +633,7 @@ public class Batalla_1 extends JDialog {
                     System.out.println("Clase encontrada: " + c.getName());
 
                     try {
-                        // 👉 usar la instancia real, no crear una nueva
+                        // 👉 usa la instancia real, no se crea una nueva
                         Object instancia = tropa;
 
                         // Buscar solo el método deseado (no hace falta recorrer todos si ya sabes el nombre)

@@ -17,7 +17,7 @@ public class Main {
 
         System.out.println(ejercito1.get(0));
         System.out.println(ejercito2.get(5));
-        
+
         Batalla_1 xd = new Batalla_1(ejercito1, ejercito2, null, "waza");
 
     }
