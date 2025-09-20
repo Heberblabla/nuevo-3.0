@@ -371,8 +371,8 @@ public class Batalla_1 extends JDialog {
                 //vamos a ver si la tropa q sigue ,esta viva
                 posicion_del_turno_actual = posicion_del_turno_actual - 1;
                 //verficamos 
-                
-                if (ejercito11.get(posicion_del_turno_actual).isEstado_de_vida()) {
+
+                if (ejercito11.get(posicion_del_turno_actual).isEstado_de_vida() && ejercito11.get(posicion_del_turno_actual).getVida() > 0) {
                     //si esta viva ,entonces se activa su deslegable de ataques
                     combo2.setVisible(true);
                     desplegable(ejercito11, ejercito22, posicion_del_turno_actual, true, false);
@@ -391,7 +391,7 @@ public class Batalla_1 extends JDialog {
                 //vamos a ver si la tropa q sigue ,esta viva
                 posicion_del_turno_actual = posicion_del_turno_actual - 1;
                 //verficamos 
-                if (ejercito11.get(posicion_del_turno_actual).isEstado_de_vida()) {
+                if (ejercito11.get(posicion_del_turno_actual).isEstado_de_vida() && ejercito11.get(posicion_del_turno_actual).getVida() > 0) {
                     //si esta viva ,entonces se activa su deslegable de ataques
                     combo3.setVisible(true);
                     desplegable(ejercito11, ejercito22, posicion_del_turno_actual, true, false);
@@ -410,7 +410,7 @@ public class Batalla_1 extends JDialog {
                 //vamos a ver si la tropa q sigue ,esta viva
                 posicion_del_turno_actual = posicion_del_turno_actual - 1;
                 //verficamos 
-                if (ejercito11.get(posicion_del_turno_actual).isEstado_de_vida()) {
+                if (ejercito11.get(posicion_del_turno_actual).isEstado_de_vida() && ejercito11.get(posicion_del_turno_actual).getVida() > 0) {
                     //si esta viva ,entonces se activa su deslegable de ataques
                     combo4.setVisible(true);
                     desplegable(ejercito11, ejercito22, posicion_del_turno_actual, true, false);
@@ -429,7 +429,7 @@ public class Batalla_1 extends JDialog {
                 //vamos a ver si la tropa q sigue ,esta viva
                 posicion_del_turno_actual = posicion_del_turno_actual - 1;
                 //verficamos 
-                if (ejercito11.get(posicion_del_turno_actual).isEstado_de_vida()) {
+                if (ejercito11.get(posicion_del_turno_actual).isEstado_de_vida() && ejercito11.get(posicion_del_turno_actual).getVida() > 0) {
                     //si esta viva ,entonces se activa su deslegable de ataques
                     desplegable(ejercito11, ejercito22, posicion_del_turno_actual, true, false);
                     combo5.setVisible(true);
@@ -449,7 +449,7 @@ public class Batalla_1 extends JDialog {
 
                 posicion_del_turno_actual = posicion_del_turno_actual - 1;
                 //verficamos      
-                if (ejercito11.get(posicion_del_turno_actual).isEstado_de_vida()) {
+                if (ejercito11.get(posicion_del_turno_actual).isEstado_de_vida() && ejercito11.get(posicion_del_turno_actual).getVida() > 0) {
                     //si esta viva ,entonces se activa su deslegable de ataques
 
                     combo6.setVisible(true);
@@ -471,7 +471,7 @@ public class Batalla_1 extends JDialog {
                 //vamos a ver si la tropa q sigue ,esta viva ,actualizamos el contenedor
                 posicion_del_turno_actual = 5;
                 //verficamos 
-                if (ejercito22.get(posicion_del_turno_actual).isEstado_de_vida()) {
+                if (ejercito22.get(posicion_del_turno_actual).isEstado_de_vida() && ejercito22.get(posicion_del_turno_actual).getVida() > 0) {
                     //si esta viva ,entonces se activa su deslegable de ataques
                     desplegable(ejercito11, ejercito22, posicion_del_turno_actual, false, true);
                     combo7.setVisible(true);
@@ -491,7 +491,7 @@ public class Batalla_1 extends JDialog {
                 //vamos a ver si la tropa q sigue ,esta viva
                 posicion_del_turno_actual = posicion_del_turno_actual - 1;
                 //verficamos 
-                if (ejercito22.get(posicion_del_turno_actual).isEstado_de_vida()) {
+                if (ejercito22.get(posicion_del_turno_actual).isEstado_de_vida() && ejercito22.get(posicion_del_turno_actual).getVida() > 0) {
                     //si esta viva ,entonces se activa su deslegable de ataques
                     desplegable(ejercito11, ejercito22, posicion_del_turno_actual, false, true);
                     combo8.setVisible(true);
@@ -510,7 +510,7 @@ public class Batalla_1 extends JDialog {
                 //vamos a ver si la tropa q sigue ,esta viva
                 posicion_del_turno_actual = posicion_del_turno_actual - 1;
                 //verficamos 
-                if (ejercito22.get(posicion_del_turno_actual).isEstado_de_vida()) {
+                if (ejercito22.get(posicion_del_turno_actual).isEstado_de_vida() && ejercito22.get(posicion_del_turno_actual).getVida() > 0) {
                     //si esta viva ,entonces se activa su deslegable de ataques
                     desplegable(ejercito11, ejercito22, posicion_del_turno_actual, false, true);
                     combo9.setVisible(true);
@@ -529,7 +529,7 @@ public class Batalla_1 extends JDialog {
                 //vamos a ver si la tropa q sigue ,esta viva
                 posicion_del_turno_actual = posicion_del_turno_actual - 1;
                 //verficamos 
-                if (ejercito22.get(posicion_del_turno_actual).isEstado_de_vida()) {
+                if (ejercito22.get(posicion_del_turno_actual).isEstado_de_vida() && ejercito22.get(posicion_del_turno_actual).getVida() > 0) {
                     //si esta viva ,entonces se activa su deslegable de ataques
                     desplegable(ejercito11, ejercito22, posicion_del_turno_actual, false, true);
                     combo10.setVisible(true);
@@ -548,7 +548,7 @@ public class Batalla_1 extends JDialog {
                 //vamos a ver si la tropa q sigue ,esta viva
                 posicion_del_turno_actual = posicion_del_turno_actual - 1;
                 //verficamos 
-                if (ejercito22.get(posicion_del_turno_actual).isEstado_de_vida()) {
+                if (ejercito22.get(posicion_del_turno_actual).isEstado_de_vida() && ejercito22.get(posicion_del_turno_actual).getVida() > 0) {
                     //si esta viva ,entonces se activa su deslegable de ataques
                     desplegable(ejercito11, ejercito22, posicion_del_turno_actual, false, true);
                     combo11.setVisible(true);
@@ -567,7 +567,7 @@ public class Batalla_1 extends JDialog {
                 //vamos a ver si la tropa q sigue ,esta viva
                 posicion_del_turno_actual = posicion_del_turno_actual - 1;
                 //verficamos 
-                if (ejercito22.get(posicion_del_turno_actual).isEstado_de_vida()) {
+                if (ejercito22.get(posicion_del_turno_actual).isEstado_de_vida() && ejercito22.get(posicion_del_turno_actual).getVida() > 0) {
                     //si esta viva ,entonces se activa su deslegable de ataques
                     desplegable(ejercito11, ejercito22, posicion_del_turno_actual, false, true);
                     combo12.setVisible(true);
@@ -588,7 +588,7 @@ public class Batalla_1 extends JDialog {
                 //comprobar_si_existe_tropa_viva
                 posicion_del_turno_actual = 5;
                 //verficamos 
-                if (ejercito11.get(posicion_del_turno_actual).isEstado_de_vida()) {
+                if (ejercito11.get(posicion_del_turno_actual).isEstado_de_vida() && ejercito11.get(posicion_del_turno_actual).getVida() > 0) {
                     //si esta viva ,entonces se activa su deslegable de ataques
                     desplegable(ejercito11, ejercito22, posicion_del_turno_actual, true, false);
                     combo1.setVisible(true);
