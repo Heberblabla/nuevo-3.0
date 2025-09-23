@@ -11,8 +11,16 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.*;
+import java.net.URL;
+import java.net.*;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.*;
+import static org.postgresql.PGProperty.PASSWORD;
+import static org.postgresql.PGProperty.USER;
 
 public class Soticklord {
 
@@ -20,6 +28,9 @@ public class Soticklord {
     private static JFrame Dificultad;
     static List<Tropa> ejercito1 = new ArrayList<>();
     static List<Tropa> ejercito2 = new ArrayList<>();
+    private static final String URL = "jdbc:postgresql://aws-1-us-east-2.pooler.supabase.com:6543/postgres";
+    private static final String USER = "postgres.oxwodtlyumsrzwhrjcbh";
+    private static final String PASSWORD = "Tuhermana1233456789";
     //static Mago magito;
     // Objetos de cada jugador    
     //static Jugador rey10, Tropa11, Tropa12, rey20, Tropa21, Tropa22;
@@ -271,6 +282,25 @@ public class Soticklord {
         }
 
         return false; // ❌ No encontró coincidencia
+    }
+
+    public static void SubirUsuario(String nombre, String contraseña) {
+
+        try (Connection con = DriverManager.getConnection(URL, USER, PASSWORD)) {
+
+            String sql = "INSERT INTO usuario_progreso (nombre, contrasena, nivel) VALUES (?, ?, ?)";
+
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setString(1, nombre);   // nombre
+            ps.setString(2, contraseña);   // contraseña
+            ps.setInt(3, 1);            // nivel inicial
+
+            int filas = ps.executeUpdate();
+            System.out.println("✅ Usuario registrado. Filas afectadas: " + filas);
+
+        } catch (Exception e) {
+            System.out.println("❌ Error: " + e.getMessage());
+        }
     }
 
     public static void main(String[] args) {
