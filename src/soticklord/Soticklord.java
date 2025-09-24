@@ -11,16 +11,15 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.*;
-import java.net.URL;
-import java.net.*;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.sql.*;
+
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
-import java.sql.*;
-import static org.postgresql.PGProperty.PASSWORD;
-import static org.postgresql.PGProperty.USER;
 
 public class Soticklord {
 
@@ -225,84 +224,66 @@ public class Soticklord {
         }
     }
 
-    public static boolean registrarUsuario(String user, String pass) {
-        File file = new File("recursos/usuarios.csv");
+    public static boolean registrarUsuario(String nombre, String pass) {
+        try (Connection con = DriverManager.getConnection(URL, USER, PASSWORD)) {
 
-        try {
-            // Si el archivo no existe, lo creamos vacío
-            if (!file.exists()) {
-                file.createNewFile();
+            // Verificar si ya existe
+            String check = "SELECT COUNT(*) FROM usuario_progreso WHERE nombre = ?";
+            PreparedStatement psCheck = con.prepareStatement(check);
+            psCheck.setString(1, nombre);
+            ResultSet rs = psCheck.executeQuery();
+            rs.next();
+            if (rs.getInt(1) > 0) {
+                System.out.println("⚠️ Usuario ya existe.");
+                return false;
             }
 
-            // Primero revisamos si ya existe ese usuario
-            try (BufferedReader br = new BufferedReader(new FileReader(file))) {
-                String linea;
-                while ((linea = br.readLine()) != null) {
-                    String[] datos = linea.split(",");
-                    if (datos.length >= 1 && datos[0].equals(user)) {
-                        return false; // ❌ Usuario ya registrado
-                    }
-                }
-            }
+            // Insertar con contraseña hasheada
+            String sql = "INSERT INTO usuario_progreso (nombre, contrasena, nivel) VALUES (?, ?, ?)";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setString(1, nombre);
+            ps.setString(2, getSHA256(pass)); // 🔒 Guardar hash
+            ps.setInt(3, 1);
 
-            // Si no existe, lo registramos con contraseña hasheada
-            String hash = getSHA256(pass);
+            int filas = ps.executeUpdate();
+            System.out.println("✅ Usuario registrado. Filas afectadas: " + filas);
+            return true;
 
-            try (FileWriter fw = new FileWriter(file, true); BufferedWriter bw = new BufferedWriter(fw); PrintWriter pw = new PrintWriter(bw)) {
-
-                pw.println(user + "," + hash);
-            }
-
-            return true; // ✅ Usuario registrado
-
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (Exception e) {
+            System.out.println("❌ Error: " + e.getMessage());
             return false;
         }
     }
 
-    public static boolean verificarUsuario(String user, String pass) {
-        String hash = getSHA256(pass);
-
-        try (BufferedReader br = new BufferedReader(new FileReader("recursos/usuarios.csv"))) {
-            String linea;
-            while ((linea = br.readLine()) != null) {
-                String[] datos = linea.split(",");
-                if (datos.length == 2) {
-                    String usuario = datos[0];
-                    String hashGuardado = datos[1];
-
-                    if (usuario.equals(user) && hashGuardado.equals(hash)) {
-                        return true; // ✅ Usuario encontrado y contraseña correcta
-                    }
-                }
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        return false; // ❌ No encontró coincidencia
-    }
-
-    public static void SubirUsuario(String nombre, String contraseña) {
-
+    public static boolean verificarUsuario(String nombre, String pass) {
         try (Connection con = DriverManager.getConnection(URL, USER, PASSWORD)) {
-
-            String sql = "INSERT INTO usuario_progreso (nombre, contrasena, nivel) VALUES (?, ?, ?)";
-
+            String sql = "SELECT contrasena FROM usuario_progreso WHERE nombre = ?";
             PreparedStatement ps = con.prepareStatement(sql);
-            ps.setString(1, nombre);   // nombre
-            ps.setString(2, contraseña);   // contraseña
-            ps.setInt(3, 1);            // nivel inicial
+            ps.setString(1, nombre);
+            ResultSet rs = ps.executeQuery();
 
-            int filas = ps.executeUpdate();
-            System.out.println("✅ Usuario registrado. Filas afectadas: " + filas);
+            if (rs.next()) {
+                String hashGuardado = rs.getString("contrasena");
+                String hashInput = getSHA256(pass);
 
+                if (hashGuardado.equals(hashInput)) {
+                    System.out.println("✅ Login exitoso.");
+                    return true;
+                } else {
+                    System.out.println("❌ Contraseña incorrecta.");
+                    return false;
+                }
+            } else {
+                System.out.println("⚠️ Usuario no encontrado.");
+                return false;
+            }
         } catch (Exception e) {
             System.out.println("❌ Error: " + e.getMessage());
+            return false;
         }
     }
 
+    
     public static void main(String[] args) {
         iniciar_sesion();
     }
