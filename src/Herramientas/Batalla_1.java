@@ -628,17 +628,18 @@ public class Batalla_1 extends JDialog {
             Tropa tropa = ejercito1.get(posicion);
             String nombre = tropa.getNombre(); // nombre de la clase de tropa
 
-            for (Class<?> c : clases) { // se busca esa clase
+            for (int i = 0; i < clases.length; i++) {
+                Class<?> c = clases[i];  // tomar la clase en la posición i
+
                 if (c.getSimpleName().equals(nombre)) {
                     System.out.println("Clase encontrada: " + c.getName());
 
                     try {
-                        // 👉 usa la instancia real, no se crea una nueva
-                        Object instancia = tropa;
+                        Method[] metodos = c.getDeclaredMethods(); // guardar todos los métodos en un array
 
-                        // Buscar solo el método deseado (no hace falta recorrer todos si ya sabes el nombre)
-                        for (Method m : c.getDeclaredMethods()) {
-                            String metodo = m.getName();
+                        for (int j = 0; i < metodos.length; j++) {
+                            Method m = metodos[i];        // tomar el método en la posición i
+                            String metodo = m.getName();  // obtener el nombre del método
 
                             if (metodo.startsWith("isAereo") || metodo.startsWith("get")
                                     || metodo.startsWith("set") || metodo.equals("toString")
@@ -650,7 +651,7 @@ public class Batalla_1 extends JDialog {
 
                             if (metodo.equals(Ataque_selecionado)) {
                                 // Ejecutar el ataque en la tropa real
-                                m.invoke(instancia, ejercito2, posicion_del_enemigo);
+                                m.invoke(tropa, ejercito2, posicion_del_enemigo);
                             }
                         }
                     } catch (Exception e) {
