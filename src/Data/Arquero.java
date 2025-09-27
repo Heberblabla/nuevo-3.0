@@ -1,6 +1,7 @@
 
 package Data;
 
+
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -150,4 +151,5 @@ public class Arquero extends Tropa {
     }
 
 }
+
 
