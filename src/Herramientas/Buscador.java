@@ -21,6 +21,7 @@ public class Buscador {
         registrar(Rey_Goku.class);
         registrar(Rey_Espadachin.class);
         
+        
     }
 
     private void registrar(Class<? extends Tropa> c) {

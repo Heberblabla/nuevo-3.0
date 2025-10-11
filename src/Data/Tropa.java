@@ -1,22 +1,20 @@
 package Data;
 
-import java.util.ArrayList;
-
 public abstract class Tropa {
 
-    private String nombre;
-    private int vida;
-    private int vidavida;
-    private int ataque_base;
-    private double daño_critico;
-    private double probabilidad_de_critico;
-    private boolean aereo;
-    private boolean estado_de_vida;
-    private String rutaviva;
-    private String rutamuerta;
-    private boolean turnoActivo;
-    private boolean turnoDoble;
-
+    protected String nombre;
+    protected int vida;
+    protected int vidavida;
+    protected int ataque_base;
+    protected double daño_critico;
+    protected double probabilidad_de_critico;
+    protected boolean aereo;
+    protected boolean estado_de_vida;
+    protected String rutaviva;
+    protected String rutamuerta;
+    protected boolean turnoActivo;
+    protected boolean turnoDoble;
+ 
     public int getVidavida() {
         return vidavida;
     }
@@ -113,6 +111,8 @@ public abstract class Tropa {
         return nombre;
     }
 
+    
+    
     public void imprimir() {
         System.out.println("nombre :" + this.nombre);
         System.out.println("vida: " + this.vida);

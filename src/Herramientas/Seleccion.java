@@ -276,18 +276,17 @@ public class Seleccion extends JDialog {
             // Buscar la clase correspondiente dentro de "clases"
             for (Class<?> c : clases) {
                 if (c.getSimpleName().equals(nombreClase)) {
-                    // Crear objeto de esa clase
+
+                    // Crear objeto de esa clase (por defecto)
                     Object obj = c.getDeclaredConstructor().newInstance();
 
-                    // Leer el campo "rutaviva"
-                    java.lang.reflect.Field fRuta = c.getDeclaredField("rutaviva");
-                    fRuta.setAccessible(true);
-                    String ruta = (String) fRuta.get(obj);
+                    // Llamar al método getRutaviva()
+                    java.lang.reflect.Method mRuta = c.getMethod("getRutaviva");
+                    String ruta = (String) mRuta.invoke(obj);
 
-                    // Leer el campo "vida"
-                    java.lang.reflect.Field fVida = c.getDeclaredField("vida");
-                    fVida.setAccessible(true);
-                    int vida = (int) fVida.get(obj);
+                    // Llamar al método getVida()
+                    java.lang.reflect.Method mVida = c.getMethod("getVida");
+                    int vida = (int) mVida.invoke(obj);
 
                     // Actualizar imagen
                     lblImagen.setIcon(escalarImagen(ruta, lblImagen.getWidth(), lblImagen.getHeight()));
@@ -301,30 +300,8 @@ public class Seleccion extends JDialog {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-    }
 
-    private void actualizarImagen1(JLabel lbl, String nombreClase) {
-        try {
-            // Buscar la clase correspondiente dentro de "clases"
-            for (Class<?> c : clases) {
-                if (c.getSimpleName().equals(nombreClase)) {
-                    // Crear objeto
-                    Object obj = c.getDeclaredConstructor().newInstance();
-
-                    // Leer el campo "rutaviva"
-                    java.lang.reflect.Field f = c.getDeclaredField("rutaviva");
-                    f.setAccessible(true);
-                    String ruta = (String) f.get(obj);
-
-                    // Actualizar imagen
-                    lbl.setIcon(escalarImagen(ruta, lbl.getWidth(), lbl.getHeight()));
-                    break;
-                }
-            }
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-    }
+    }  
 
     private ImageIcon escalarImagen(String ruta, int ancho, int alto) {
         ImageIcon iconoOriginal = new ImageIcon(ruta);

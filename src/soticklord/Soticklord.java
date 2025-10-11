@@ -19,8 +19,6 @@ public class Soticklord {
 
     private static JFrame frame; // referencia de la ventana
     private static JFrame Dificultad;
-    static List<Tropa> ejercito1 = new ArrayList<>();
-    static List<Tropa> ejercito2 = new ArrayList<>();
     private static final String URL = "jdbc:postgresql://aws-1-us-east-2.pooler.supabase.com:6543/postgres";
     private static final String USER = "postgres.oxwodtlyumsrzwhrjcbh";
     private static final String PASSWORD = "Tuhermana1233456789";
@@ -72,7 +70,7 @@ public class Soticklord {
     }
 
     public static void pvp() {
-        frame.dispose(); // 🔹 cierra  
+        //frame.dispose(); // 🔹 cierra  
         Seleccion seleccion1 = new Seleccion(null, "Jugador 1");
         Seleccion seleccion2 = new Seleccion(null, "Jugador 2");
         Buscador buscador = new Buscador();
@@ -279,7 +277,7 @@ public class Soticklord {
 
     
     public static void main(String[] args) {
-        iniciar_sesion();
+        pvp();
     }
 
 }

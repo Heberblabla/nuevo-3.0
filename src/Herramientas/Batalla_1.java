@@ -621,25 +621,24 @@ public class Batalla_1 extends JDialog {
             Rey_Lanzatonio.class,
             Rey_Espadachin.class,
             Rey_Goku.class,
+            
             Rey_de_los_Gigantes.class
         };
         if (turno_de_la_tropa_correspondiente >= 0 && turno_de_la_tropa_correspondiente <= 6) {
-
             Tropa tropa = ejercito1.get(posicion);
             String nombre = tropa.getNombre(); // nombre de la clase de tropa
 
-            for (int i = 0; i < clases.length; i++) {
-                Class<?> c = clases[i];  // tomar la clase en la posición i
-
+            for (Class<?> c : clases) { // se busca esa clase
                 if (c.getSimpleName().equals(nombre)) {
                     System.out.println("Clase encontrada: " + c.getName());
 
                     try {
-                        Method[] metodos = c.getDeclaredMethods(); // guardar todos los métodos en un array
+                        // 👉 usar la instancia real, no crear una nueva
+                        Object instancia = tropa;
 
-                        for (int j = 0; i < metodos.length; j++) {
-                            Method m = metodos[i];        // tomar el método en la posición i
-                            String metodo = m.getName();  // obtener el nombre del método
+                        // Buscar solo el método deseado (no hace falta recorrer todos si ya sabes el nombre)
+                        for (Method m : c.getDeclaredMethods()) {
+                            String metodo = m.getName();
 
                             if (metodo.startsWith("isAereo") || metodo.startsWith("get")
                                     || metodo.startsWith("set") || metodo.equals("toString")
@@ -651,7 +650,7 @@ public class Batalla_1 extends JDialog {
 
                             if (metodo.equals(Ataque_selecionado)) {
                                 // Ejecutar el ataque en la tropa real
-                                m.invoke(tropa, ejercito2, posicion_del_enemigo);
+                                m.invoke(instancia, ejercito2, posicion_del_enemigo);
                             }
                         }
                     } catch (Exception e) {
@@ -738,6 +737,7 @@ public class Batalla_1 extends JDialog {
             Rey_Lanzatonio.class,
             Rey_Espadachin.class,
             Rey_Goku.class,
+            
             Rey_de_los_Gigantes.class
 
         };
@@ -878,63 +878,63 @@ public class Batalla_1 extends JDialog {
         jugador1Rey.setIcon(escalarImagen(
                 (ejercito1.get(0).getVida() > 0) ? ejercito1.get(0).getRutaviva() : ejercito1.get(0).getRutamuerta(),
                 120, 120, 1));
-        vidaRey1.setText((ejercito1.get(0).getVida() > 0) ? "Vida: " + ejercito1.get(0).getVida() : "X");
+        vidaRey1.setText((ejercito1.get(0).getVida() > 0) ? "❤: " + ejercito1.get(0).getVida() : "X");
 
         jugador1Tropa1.setIcon(escalarImagen(
                 (ejercito1.get(1).getVida() > 0) ? ejercito1.get(1).getRutaviva() : ejercito1.get(1).getRutamuerta(),
                 100, 100, 1));
-        vidaT1A.setText((ejercito1.get(1).getVida() > 0) ? "Vida: " + ejercito1.get(1).getVida() : "X");
+        vidaT1A.setText((ejercito1.get(1).getVida() > 0) ? "❤: " + ejercito1.get(1).getVida() : "X");
 
         jugador1Tropa2.setIcon(escalarImagen(
                 (ejercito1.get(2).getVida() > 0) ? ejercito1.get(2).getRutaviva() : ejercito1.get(2).getRutamuerta(),
                 100, 100, 1));
-        vidaT2A.setText((ejercito1.get(2).getVida() > 0) ? "Vida: " + ejercito1.get(2).getVida() : "X");
+        vidaT2A.setText((ejercito1.get(2).getVida() > 0) ? "❤: " + ejercito1.get(2).getVida() : "X");
 
         jugador1Tropa3.setIcon(escalarImagen(
                 (ejercito1.get(3).getVida() > 0) ? ejercito1.get(3).getRutaviva() : ejercito1.get(3).getRutamuerta(),
                 100, 100, 1));
-        vidaT3A.setText((ejercito1.get(3).getVida() > 0) ? "Vida: " + ejercito1.get(3).getVida() : "X");
+        vidaT3A.setText((ejercito1.get(3).getVida() > 0) ? "❤: " + ejercito1.get(3).getVida() : "X");
 
         jugador1Tropa4.setIcon(escalarImagen(
                 (ejercito1.get(4).getVida() > 0) ? ejercito1.get(4).getRutaviva() : ejercito1.get(4).getRutamuerta(),
                 100, 100, 1));
-        vidaT4A.setText((ejercito1.get(4).getVida() > 0) ? "Vida: " + ejercito1.get(4).getVida() : "X");
+        vidaT4A.setText((ejercito1.get(4).getVida() > 0) ? "❤: " + ejercito1.get(4).getVida() : "X");
 
         jugador1Tropa5.setIcon(escalarImagen(
                 (ejercito1.get(5).getVida() > 0) ? ejercito1.get(5).getRutaviva() : ejercito1.get(5).getRutamuerta(),
                 100, 100, 1));
-        vidaT5A.setText((ejercito1.get(5).getVida() > 0) ? "Vida: " + ejercito1.get(5).getVida() : "X");
+        vidaT5A.setText((ejercito1.get(5).getVida() > 0) ? "❤: " + ejercito1.get(5).getVida() : "X");
 
         // ---------------- ACTUALIZAR EJERCITO 2 ----------------
         jugador2Rey.setIcon(escalarImagen(
                 (ejercito2.get(0).getVida() > 0) ? ejercito2.get(0).getRutaviva() : ejercito2.get(0).getRutamuerta(),
                 120, 120, 0));
-        vidaRey2.setText((ejercito2.get(0).getVida() > 0) ? "Vida: " + ejercito2.get(0).getVida() : "X");
+        vidaRey2.setText((ejercito2.get(0).getVida() > 0) ? "❤: " + ejercito2.get(0).getVida() : "X");
 
         jugador2Tropa1.setIcon(escalarImagen(
                 (ejercito2.get(1).getVida() > 0) ? ejercito2.get(1).getRutaviva() : ejercito2.get(1).getRutamuerta(),
                 100, 100, 0));
-        vidaT1B.setText((ejercito2.get(1).getVida() > 0) ? "Vida: " + ejercito2.get(1).getVida() : "X");
+        vidaT1B.setText((ejercito2.get(1).getVida() > 0) ? "❤: " + ejercito2.get(1).getVida() : "X");
 
         jugador2Tropa2.setIcon(escalarImagen(
                 (ejercito2.get(2).getVida() > 0) ? ejercito2.get(2).getRutaviva() : ejercito2.get(2).getRutamuerta(),
                 100, 100, 0));
-        vidaT2B.setText((ejercito2.get(2).getVida() > 0) ? "Vida: " + ejercito2.get(2).getVida() : "X");
+        vidaT2B.setText((ejercito2.get(2).getVida() > 0) ? "❤: " + ejercito2.get(2).getVida() : "X");
 
         jugador2Tropa3.setIcon(escalarImagen(
                 (ejercito2.get(3).getVida() > 0) ? ejercito2.get(3).getRutaviva() : ejercito2.get(3).getRutamuerta(),
                 100, 100, 0));
-        vidaT3B.setText((ejercito2.get(3).getVida() > 0) ? "Vida: " + ejercito2.get(3).getVida() : "X");
+        vidaT3B.setText((ejercito2.get(3).getVida() > 0) ? "❤: " + ejercito2.get(3).getVida() : "X");
 
         jugador2Tropa4.setIcon(escalarImagen(
                 (ejercito2.get(4).getVida() > 0) ? ejercito2.get(4).getRutaviva() : ejercito2.get(4).getRutamuerta(),
                 100, 100, 0));
-        vidaT4B.setText((ejercito2.get(4).getVida() > 0) ? "Vida: " + ejercito2.get(4).getVida() : "X");
+        vidaT4B.setText((ejercito2.get(4).getVida() > 0) ? "❤: " + ejercito2.get(4).getVida() : "X");
 
         jugador2Tropa5.setIcon(escalarImagen(
                 (ejercito2.get(5).getVida() > 0) ? ejercito2.get(5).getRutaviva() : ejercito2.get(5).getRutamuerta(),
                 100, 100, 0));
-        vidaT5B.setText((ejercito2.get(5).getVida() > 0) ? "Vida: " + ejercito2.get(5).getVida() : "X");
+        vidaT5B.setText((ejercito2.get(5).getVida() > 0) ? "❤: " + ejercito2.get(5).getVida() : "X");
 
         // ---------------- CONDICIONES DE VICTORIA ----------------
         boolean ejercito1Muerto = true;
