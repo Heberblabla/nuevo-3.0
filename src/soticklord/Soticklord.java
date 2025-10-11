@@ -51,6 +51,7 @@ public class Soticklord {
 
         // Acciones de los botones (ejemplo con mensaje)
         pvpButton.addActionListener(e -> {
+            frame.dispose();
             pvp();
 
         });
@@ -137,7 +138,7 @@ public class Soticklord {
         ventana.setLayout(null); // Usaremos coordenadas manuales
 
         // 📌 Imagen de fondo
-        ImageIcon imagen = new ImageIcon("recursos/sesion.png"); // ruta de tu imagen
+        ImageIcon imagen = new ImageIcon("recursos/Iniciar_Sesion.png"); // ruta de tu imagen
         Image imgEscalada = imagen.getImage().getScaledInstance(800, 600, Image.SCALE_SMOOTH);
         JLabel fondo = new JLabel(new ImageIcon(imgEscalada));
         fondo.setBounds(0, 0, 800, 600);
@@ -274,7 +275,8 @@ public class Soticklord {
 
     
     public static void main(String[] args) {
-        pvp();
+        iniciar_sesion();
+        
     }
 
 }
