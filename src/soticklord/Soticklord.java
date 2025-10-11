@@ -17,7 +17,7 @@ public class Soticklord {
     private static JFrame frame; // referencia de la ventana
     private static JFrame Dificultad;
     private static final String URL = "jdbc:postgresql://aws-1-us-east-2.pooler.supabase.com:6543/postgres";
-    private static final String USER = "postgres.oxwodtlyumsrzwhrjcbh";
+    private static final String USER = "postgres.zropeiibzqefzjrkdzzp";
     private static final String PASSWORD = "Tuhermana1233456789";
     //static Mago magito;
     // Objetos de cada jugador    
@@ -216,9 +216,8 @@ public class Soticklord {
 
     public static boolean registrarUsuario(String nombre, String pass) {
         try (Connection con = DriverManager.getConnection(URL, USER, PASSWORD)) {
-
             // Verificar si ya existe
-            String check = "SELECT COUNT(*) FROM usuario_progreso WHERE nombre = ?";
+            String check = "SELECT COUNT(*) FROM jugadores WHERE nombre_usuario = ?";
             PreparedStatement psCheck = con.prepareStatement(check);
             psCheck.setString(1, nombre);
             ResultSet rs = psCheck.executeQuery();
@@ -229,13 +228,14 @@ public class Soticklord {
             }
 
             // Insertar con contraseña hasheada
-            String sql = "INSERT INTO usuario_progreso (nombre, contrasena, nivel) VALUES (?, ?, ?)";
+            String sql = "INSERT INTO jugadores (nombre_usuario, contrasena, monedas) VALUES (?, ?, ?)";
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setString(1, nombre);
-            ps.setString(2, getSHA256(pass)); // 🔒 Guardar hash
+            ps.setString(2, getSHA256(pass)); // 🔒 Guardar hash SHA-256
             ps.setInt(3, 1);
 
-            int filas = ps.executeUpdate();
+            int filas = ps.executeUpdate(); // ✅ ejecutar solo una vez
+
             System.out.println("✅ Usuario registrado. Filas afectadas: " + filas);
             return true;
 
@@ -247,7 +247,7 @@ public class Soticklord {
 
     public static boolean verificarUsuario(String nombre, String pass) {
         try (Connection con = DriverManager.getConnection(URL, USER, PASSWORD)) {
-            String sql = "SELECT contrasena FROM usuario_progreso WHERE nombre = ?";
+            String sql = "SELECT contrasena FROM jugadores WHERE nombre_usuario = ?";
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setString(1, nombre);
             ResultSet rs = ps.executeQuery();
@@ -273,10 +273,9 @@ public class Soticklord {
         }
     }
 
-    
     public static void main(String[] args) {
         iniciar_sesion();
-        
+
     }
 
 }
