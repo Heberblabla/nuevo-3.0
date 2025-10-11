@@ -2,13 +2,10 @@ package soticklord;
 
 import Herramientas.*;
 import Data.*;
-
-import java.util.ArrayList;
 import java.util.List;
 import javax.swing.*;
 import java.awt.*;
 import java.sql.*;
-
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;

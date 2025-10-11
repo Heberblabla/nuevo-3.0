@@ -612,18 +612,8 @@ public class Batalla_1 extends JDialog {
 
     private void waos(String Ataque_selecionado, int posicion_del_enemigo, List<Tropa> ejercito1, List<Tropa> ejercito2, int posicion) {
 
-        Class<?>[] clases = {
-            Arquero.class,
-            Lanzatonio.class,
-            Espadachin.class,
-            Gigante.class,
-            Rey_Arquero.class,
-            Rey_Lanzatonio.class,
-            Rey_Espadachin.class,
-            Rey_Goku.class,
-            
-            Rey_de_los_Gigantes.class
-        };
+        Class<?>[] clases = Buscador.getInstancia().obtenerTodas();
+
         if (turno_de_la_tropa_correspondiente >= 0 && turno_de_la_tropa_correspondiente <= 6) {
             Tropa tropa = ejercito1.get(posicion);
             String nombre = tropa.getNombre(); // nombre de la clase de tropa
@@ -728,19 +718,8 @@ public class Batalla_1 extends JDialog {
         JComboBox<String> combo = new JComboBox<>();
         combo.setBounds(x, y, 150, 30);
 
-        Class<?>[] clases = {
-            Arquero.class,
-            Lanzatonio.class,
-            Espadachin.class,
-            Gigante.class,
-            Rey_Arquero.class,
-            Rey_Lanzatonio.class,
-            Rey_Espadachin.class,
-            Rey_Goku.class,
-            
-            Rey_de_los_Gigantes.class
+        Class<?>[] clases = Buscador.getInstancia().obtenerTodas();
 
-        };
 
         for (Class<?> c : clases) {
             if (c.getSimpleName().equals(j)) {

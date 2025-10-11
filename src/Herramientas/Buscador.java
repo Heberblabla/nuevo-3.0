@@ -1,16 +1,18 @@
 package Herramientas;
 
-import java.util.ArrayList;
-import java.util.List;
-import Data.*;
 import java.util.*;
+import Data.*;
 
 public class Buscador {
 
+    //Instancia única
+    private static final Buscador instancia = new Buscador();
+
+    //Mapa de clases registradas
     private final Map<String, Class<? extends Tropa>> mapa = new HashMap<>();
 
+    //Constructor privado
     public Buscador() {
-        // Registrar clases
         registrar(Arquero.class);
         registrar(Lanzatonio.class);
         registrar(Espadachin.class);
@@ -20,14 +22,29 @@ public class Buscador {
         registrar(Rey_de_los_Gigantes.class);
         registrar(Rey_Goku.class);
         registrar(Rey_Espadachin.class);
-        
-        
     }
 
+    //Obtener la instancia global
+    public static Buscador getInstancia() {
+        return instancia;
+    }
+
+    //Registrar una clase
     private void registrar(Class<? extends Tropa> c) {
         mapa.put(c.getSimpleName(), c);
     }
 
+    //Obtener una clase por nombre
+    public Class<? extends Tropa> obtenerClase(String nombre) {
+        return mapa.get(nombre);
+    }
+
+    //Obtener todas las clases registradas
+    public Class<?>[] obtenerTodas() {
+        return mapa.values().toArray(new Class<?>[0]);
+    }
+
+    //Crear instancias desde una selección
     public List<Tropa> obtenerTropas(Seleccion seleccion) {
         List<Tropa> tropas = new ArrayList<>();
         String[] nombres = {

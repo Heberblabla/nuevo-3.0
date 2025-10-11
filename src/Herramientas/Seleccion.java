@@ -1,6 +1,5 @@
 package Herramientas;
 
-import Data.*;
 import java.awt.Color;
 import java.awt.Frame;
 import java.awt.Image;
@@ -33,16 +32,8 @@ public class Seleccion extends JDialog {
     private String[] nombresReyes;
     private String[] nombresTropas;
 
-    private final Class<?>[] clases = {
-        Arquero.class,
-        Lanzatonio.class,
-        Espadachin.class,
-        Gigante.class,
-        Rey_Arquero.class,
-        Rey_Lanzatonio.class,
-        Rey_de_los_Gigantes.class,
-        Rey_Goku.class,
-        Rey_Espadachin.class,};
+    private final Class<?>[] clases = Buscador.getInstancia().obtenerTodas();
+
 
     public String getNombre_Rey() {
         return nombre_Rey;
