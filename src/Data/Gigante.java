@@ -3,9 +3,6 @@ package Data;
 import java.util.ArrayList;
 import java.util.Random;
 
-
-
-
 public class Gigante extends Tropa {
 
     public Gigante() {
